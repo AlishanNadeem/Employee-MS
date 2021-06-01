@@ -10,8 +10,6 @@ import {
     Avatar,
     Typography,
     Divider,
-    Backdrop,
-    CircularProgress
 } from '@material-ui/core';
 import { Face, Fingerprint } from '@material-ui/icons';
 import { Redirect } from 'react-router-dom';
@@ -32,10 +30,6 @@ const styles = theme => ({
     large: {
         width: theme.spacing(15),
         height: theme.spacing(15),
-    },
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
-        color: '#fff',
     },
 });
 
@@ -88,7 +82,7 @@ class Login extends React.Component {
 
     render() {
         const { classes } = this.props;
-        
+
         if (this.state.isLogged === true) {
             return <Redirect to="/" />
         }
