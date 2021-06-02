@@ -22,10 +22,10 @@ const styles = theme => ({
         padding: theme.spacing.unit
     },
     baseColor: {
-        backgroundColor: '#032b43',
+        backgroundColor: '#003049',
     },
     color: {
-        color: '#032b43',
+        color: '#003049',
     },
     large: {
         width: theme.spacing(15),

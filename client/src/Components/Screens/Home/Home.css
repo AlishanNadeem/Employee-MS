@@ -2,14 +2,12 @@
     display: flex;
     flex: 1;
     flex-direction: row;
-    background-color: black;
     height: 100vh;
 }
 
 .Left-Div{
     display: flex;
     flex: 0.7;
-    background-color: #032b43;
 }
 
 .Right-Div{
@@ -22,9 +20,16 @@
 .LeftBody-Div{
     display: flex;
     flex: 1;
-    background-color: #032b43;
+    background-color: #003049;
     color: white;
 }
+
+/* Color Contrast
+
+Base Color : 
+Matching Colors : red d62828, yellow f77f00
+
+*/
 
 .First-Div{
     display: flex;
@@ -45,9 +50,9 @@
     display: flex;
     flex: 1;
     margin: 20px;
-    box-shadow: 5px 5px 15px -1px #000000;
+    box-shadow: 5px 5px 15px -1px #003049;
     border-radius: 25px;
-    border: 3px solid #032b43;
+    border: 3px solid #003049;
     color: black;
     justify-content: center;
     align-items: center;
