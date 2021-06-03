@@ -76,8 +76,10 @@ export default function CustomizedTables() {
                     </TableRow>
                 </TableHead>
                 {
-                    isLoaded === false ?
-                        (<Loader />) :
+                    isLoaded === true ?
+                        (
+                            <Loader />
+                        ) :
                         (
                             pendingProjects.length > 0 ?
                                 (<TableBody>
