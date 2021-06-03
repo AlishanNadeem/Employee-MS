@@ -34,69 +34,77 @@ const useStyles = makeStyles({
     table: {
         minWidth: 700,
     },
-    statusColor: {
+    statusColorRed: {
         color: 'red'
+    },
+    statusColorGreen: {
+        color: 'green'
     }
 });
 
 export default function CustomizedTables() {
     const classes = useStyles();
-    const [pendingProjects, setPendingProjects] = useState([]);
+    const [projects, setProjects] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        getPendingProjects();
+        getProjects();
     }, []);
 
-    const getPendingProjects = () => {
-        Axios.get('http://localhost:5000/employee/viewProjects', {
+    const getProjects = () => {
+        Axios.get('http://localhost:5000/employee/viewProjectHistory', {
             headers: {
                 'x-access-token': localStorage.getItem('x-access-token')
             }
         })
             .then((res) => {
                 console.log(res.data);
-                const getPendingProjects = res.data;
+                const getProjects = res.data;
                 setIsLoaded(true);
-                setPendingProjects(getPendingProjects);
+                setProjects(getProjects);
             })
-            .catch((error) => {
+            .catch((error) => {             
                 console.log(error);
             })
     }
 
     return (
         <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Project Description</StyledTableCell>
-                        <StyledTableCell align="center">Assigning Date</StyledTableCell>
-                        <StyledTableCell align="center">Status</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                {
-                    isLoaded === true ?
-                        (
-                            <Loader />
-                        ) :
-                        (
-                            pendingProjects.length > 0 ?
-                                (<TableBody>
-                                    {pendingProjects.map((row) => (
-                                        <StyledTableRow key={row.description}>
-                                            <StyledTableCell component="th" scope="row">
-                                                {row.description}
-                                            </StyledTableCell>
-                                            <StyledTableCell align="center">{row.startDate}</StyledTableCell>
-                                            <StyledTableCell align="center" className={classes.statusColor}>{row.status}</StyledTableCell>
-                                        </StyledTableRow>
-                                    ))}
-                                </TableBody>) :
-                                (<h2>No Projects Found</h2>)
-                        )
-                }
-            </Table>
+            {
+                isLoaded === false ? (<Loader />) : (
+                    <Table className={classes.table} aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell>Project Description</StyledTableCell>
+                                <StyledTableCell align="center">Assigning Date</StyledTableCell>
+                                <StyledTableCell align="center">Submission Date</StyledTableCell>
+                                <StyledTableCell align="center">Status</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        {projects.length > 0 ?
+                            (<TableBody>
+                                {projects.map((projects) => (
+                                    <StyledTableRow key={projects.description}>
+                                        <StyledTableCell component="th" scope="row">
+                                            {projects.description}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="center">{projects.startDate}</StyledTableCell>
+                                        <StyledTableCell align="center">{projects.endDate}</StyledTableCell>
+                                        {
+                                            projects.status === 'Pending' ?
+                                                (<StyledTableCell align="center" className={classes.statusColorRed}>{projects.status}</StyledTableCell>) :
+                                                (<StyledTableCell align="center" className={classes.statusColorGreen}>{projects.status}</StyledTableCell>)
+                                        }
+
+                                    </StyledTableRow>
+                                ))}
+                            </TableBody>) :
+                            (<h2>No Projects Found</h2>)
+                        }
+                    </Table>
+                )
+            }
+
         </TableContainer>
     );
 }
