@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     root: {
         margin: '20px',
         width: 345,
-        height: 200,
+        height: 220,
         // maxWidth: 345,
     },
     cardAction: {
@@ -60,13 +60,16 @@ export default function MediaCard() {
                             <Typography gutterBottom variant="body1" component="p">
                                 {projects.description}
                             </Typography>
+                            <Typography gutterBottom variant="body1" component="p">
+                                {projects.startDate}
+                            </Typography>
                             <Typography gutterBottom variant="body2" component="p">
                                 Status : {projects.status}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
                     <CardActions className={classes.cardAction}>
-                        <Button size="small" color="secondary">
+                        <Button size="small" variant="outlined" color="secondary">
                             Submit
                         </Button>
                         {/* <Loader /> */}
