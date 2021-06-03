@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Employee.css';
 // import Drawer from '../../Assets/Drawer/Drawer';
 // import NavBar from '../../Assets/NavBar/NavBar';
-import ProjectTable from '../../Assets/Tables/EmployeeProjectTable'
+import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
+import PendingProject from '../../Assets/Tables/Employee/PendingProject';
 
 class Employee extends Component {
     render() {
@@ -20,7 +21,8 @@ class Employee extends Component {
                             <h2>Project history Temp</h2>
                         </div>
                         <div className="Content-Div">
-                            <ProjectTable />
+                            {/* <ProjectTable /> */}
+                            <PendingProject />
                         </div>
                     </div>
                 </div>
