@@ -13,6 +13,7 @@ const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: '#003049',
         color: theme.palette.common.white,
+        fontWeight: 'bold',
     },
     body: {
         fontSize: 14,
@@ -28,22 +29,13 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-function createData(name, calories, fat) {
-    return { name, calories, fat };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0),
-    createData('Ice cream sandwich', 237, 9.0),
-    createData('Eclair', 262, 16.0),
-    createData('Cupcake', 305, 3.7),
-    createData('Gingerbread', 356, 16.0),
-];
-
 const useStyles = makeStyles({
     table: {
         minWidth: 700,
     },
+    statusColor: {
+        color: 'red'
+    }
 });
 
 export default function CustomizedTables() {
@@ -89,7 +81,7 @@ export default function CustomizedTables() {
                                         {row.description}
                                     </StyledTableCell>
                                     <StyledTableCell align="center">{row.startDate}</StyledTableCell>
-                                    <StyledTableCell align="center">{row.status}</StyledTableCell>
+                                    <StyledTableCell align="center" className={classes.statusColor}>{row.status}</StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>) :

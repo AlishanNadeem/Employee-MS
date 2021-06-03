@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Employee.css';
-import Drawer from '../../Assets/Drawer/Drawer';
-import NavBar from '../../Assets/NavBar/NavBar';
+// import Drawer from '../../Assets/Drawer/Drawer';
+// import NavBar from '../../Assets/NavBar/NavBar';
 import ProjectTable from '../../Assets/Tables/EmployeeProjectTable'
 
 class Employee extends Component {
