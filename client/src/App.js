@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Error from './Components/Screens/Error/Error';
 import Home from './Components/Screens/Home/Home';
+import Employee from './Components/Screens/Employee/Employee';
 
 function App() {
   return (
@@ -9,10 +10,10 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/home'>
-          <Redirect to={Home}/>
+          <Redirect to='/'/>
         </Route>
-        {/* <Route to='/employee' component={}>
-        <Route to='/admin' component={}> */}
+        <Route to='/employee' component={Employee} />
+        {/* <Route to='/admin' component={}> */}
         <Route component={Error} />
       </Switch>
     </div>

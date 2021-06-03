@@ -86,7 +86,6 @@ exports.viewProjects = ((req, res, next) => {
         'status': "Pending"
     }, (err, data) => {
         if (err) return next(err);
-
         res.send(data);
     });
 });

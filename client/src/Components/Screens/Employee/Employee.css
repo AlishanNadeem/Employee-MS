@@ -1,0 +1,68 @@
+.Main-Div{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.Div{
+    display: flex;
+    flex-direction: column;
+}
+
+.Left{
+    flex: 0.2;
+    background-color: #003049;
+}
+/* Shades
+
+002c46, 003049
+*/
+
+.Right{
+    flex: 0.8;
+}
+
+.LeftBody-Div{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: #003049;
+    color: white;
+}
+
+.RightBody-Div{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: whitesmoke;
+}
+
+.Nav-Div{
+    display: flex;
+    flex: 0.1;
+    /* background-color: #003049; */
+}
+
+.Component-Div{
+    display: flex;
+    flex: 0.9;
+    flex-direction: column;
+    background-color: whitesmoke;
+}
+
+.Breadcrumbs-Div{
+    display: flex;
+    flex: 0.1;
+    margin: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    background-color: white;
+}
+
+.Content-Div{
+    display: flex;
+    flex: 0.9;
+    margin: 10px;
+    background-color: white;
+}
