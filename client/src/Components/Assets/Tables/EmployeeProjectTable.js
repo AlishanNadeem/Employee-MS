@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Axios from 'axios';
+import Loader from '../Loader';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -41,6 +42,7 @@ const useStyles = makeStyles({
 export default function CustomizedTables() {
     const classes = useStyles();
     const [pendingProjects, setPendingProjects] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         getPendingProjects();
@@ -55,6 +57,7 @@ export default function CustomizedTables() {
             .then((res) => {
                 console.log(res.data);
                 const getPendingProjects = res.data;
+                setIsLoaded(true);
                 setPendingProjects(getPendingProjects);
             })
             .catch((error) => {
@@ -73,19 +76,23 @@ export default function CustomizedTables() {
                     </TableRow>
                 </TableHead>
                 {
-                    pendingProjects.length > 0 ?
-                        (<TableBody>
-                            {pendingProjects.map((row) => (
-                                <StyledTableRow key={row.description}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.description}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="center">{row.startDate}</StyledTableCell>
-                                    <StyledTableCell align="center" className={classes.statusColor}>{row.status}</StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>) :
-                        (<h2>No Projects Found</h2>)
+                    isLoaded === false ?
+                        (<Loader />) :
+                        (
+                            pendingProjects.length > 0 ?
+                                (<TableBody>
+                                    {pendingProjects.map((row) => (
+                                        <StyledTableRow key={row.description}>
+                                            <StyledTableCell component="th" scope="row">
+                                                {row.description}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="center">{row.startDate}</StyledTableCell>
+                                            <StyledTableCell align="center" className={classes.statusColor}>{row.status}</StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                                </TableBody>) :
+                                (<h2>No Projects Found</h2>)
+                        )
                 }
             </Table>
         </TableContainer>
