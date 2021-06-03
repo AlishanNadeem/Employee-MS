@@ -66,19 +66,19 @@ class Login extends React.Component {
 
         console.log(userObject);
 
-        // Axios.post('http://localhost:5000/employee/login', userObject)
-        //     .then((res) => {
-        //         console.log(res)
-        //         localStorage.setItem('token', res.data.token);
-        //         this.setState({
-        //             isLogged: true
-        //         });
-        //     }).catch((error) => {
-        //         console.log(error)
-        //     });
+        Axios.post('http://localhost:5000/employee/login', userObject)
+            .then((res) => {
+                console.log(res)
+                localStorage.setItem('x-access-token', res.data.token);
+                this.setState({
+                    isLogged: true
+                });
+            }).catch((error) => {
+                console.log(error)
+            });
 
 
-        this.setState({ employeeId: '', password: '', isLogged: true })
+        this.setState({ employeeId: '', password: '' })
     }
 
     render() {

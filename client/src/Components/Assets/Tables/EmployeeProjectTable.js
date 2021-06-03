@@ -48,15 +48,20 @@ const useStyles = makeStyles({
 
 export default function CustomizedTables() {
     const classes = useStyles();
-    const [pendingProjects, setPendingProjects] = useState('');
+    const [pendingProjects, setPendingProjects] = useState([]);
 
     useEffect(() => {
         getPendingProjects();
     }, []);
-    
+
     const getPendingProjects = () => {
-        Axios.get('http://localhost:5000/employee/viewProjects')
+        Axios.get('http://localhost:5000/employee/viewProjects', {
+            headers: {
+                'x-access-token': localStorage.getItem('x-access-token')
+            }
+        })
             .then((res) => {
+                console.log(res.data);
                 const getPendingProjects = res.data;
                 setPendingProjects(getPendingProjects);
             })
@@ -75,17 +80,21 @@ export default function CustomizedTables() {
                         <StyledTableCell align="center">Status</StyledTableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">{row.calories}</StyledTableCell>
-                            <StyledTableCell align="center">{row.fat}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
+                {
+                    pendingProjects.length > 0 ?
+                        (<TableBody>
+                            {pendingProjects.map((row) => (
+                                <StyledTableRow key={row.description}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.description}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">{row.startDate}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.status}</StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>) :
+                        (<h2>No Projects Found</h2>)
+                }
             </Table>
         </TableContainer>
     );

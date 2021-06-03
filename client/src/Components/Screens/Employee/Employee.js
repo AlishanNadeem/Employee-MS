@@ -17,7 +17,7 @@ class Employee extends Component {
                     </div>
                     <div className="Component-Div">
                         <div className="Breadcrumbs-Div">
-                            
+                            <h2>Pending Projects Temp</h2>
                         </div>
                         <div className="Content-Div">
                             <ProjectTable />
