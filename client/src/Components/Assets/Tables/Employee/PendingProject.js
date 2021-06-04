@@ -8,13 +8,14 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Loader from '../../Loader';
 import Axios from 'axios';
+import SnackBar from '../../Snackbar';
 
 const useStyles = makeStyles({
     root: {
         margin: '20px',
         width: 345,
         height: 220,
-        // maxWidth: 345,
+        maxWidth: 345,
     },
     cardAction: {
         justifyContent: 'flex-end',
@@ -26,6 +27,7 @@ export default function MediaCard() {
 
     const [pendingProjects, setPendingProjects] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     useEffect(() => {
         getPendingProjects();
@@ -48,33 +50,47 @@ export default function MediaCard() {
             })
     }
 
+    const handleClick = () => {
+        setIsClicked(true);
+    }
 
     return (
-            pendingProjects.map((projects) => (
-                <Card className={classes.root} key={projects.description}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {projects.description}
-                            </Typography>
-                            <Typography gutterBottom variant="body1" component="p">
-                                {projects.description}
-                            </Typography>
-                            <Typography gutterBottom variant="body1" component="p">
-                                {projects.startDate}
-                            </Typography>
-                            <Typography gutterBottom variant="body2" component="p">
-                                Status : {projects.status}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions className={classes.cardAction}>
-                        <Button size="small" variant="outlined" color="secondary">
-                            Submit
-                        </Button>
-                        {/* <Loader /> */}
-                    </CardActions>
-                </Card>
-            ))
+        isLoaded === false ? (<Loader />) :
+            (
+                pendingProjects.length > 0 ?
+                    (
+                        pendingProjects.map((projects) => (
+                            <Card className={classes.root} key={projects.description}>
+                                <CardActionArea>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {projects.description}
+                                        </Typography>
+                                        <Typography gutterBottom variant="body1" component="p">
+                                            {projects.description}
+                                        </Typography>
+                                        <Typography gutterBottom variant="body1" component="p">
+                                            {projects.startDate}
+                                        </Typography>
+                                        <Typography gutterBottom variant="body2" component="p">
+                                            Status : {projects.status}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions className={classes.cardAction}>
+                                    <Button size="small" variant="outlined" color="secondary" onClick={handleClick}>
+                                        Submit
+                                    </Button>
+                                </CardActions>
+                                {
+                                    isClicked === true ? (<SnackBar message="Submitted" />) : null
+                                }
+                            </Card>
+                        ))
+                    ) :
+                    (
+                        <h2>No Pending Projects in Queue</h2>
+                    )
+            )
     );
 }
