@@ -31,17 +31,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function LeaveForm() {
+export default function LeaveForm(props) {
     const classes = useStyles();
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));]
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
 
+    useEffect(() => {
+        sendData();
+    }, []);
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
+
+    const sendData = () => {
+        props.description("Child data here");
+    }
 
     return (
         <div className={classes.margin}>
@@ -94,9 +102,6 @@ export default function LeaveForm() {
                     variant="outlined"
                     fullWidth
                 />
-            </Grid>
-            <Grid container justify="center" style={{ marginTop: '10px' }}>
-                <Button variant="contained" color="secondary" size="large" style={{ textTransform: "none" }}>Login</Button>
             </Grid>
         </div>
 

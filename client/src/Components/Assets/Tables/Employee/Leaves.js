@@ -21,6 +21,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import LeaveForm from '../../Tables/Employee/LeaveForm';
+import SaveIcon from '@material-ui/icons/Save';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -86,6 +87,7 @@ export default function CustomizedTables() {
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
+    const [description, setDescription] = React.useState({});
 
     useEffect(() => {
         getLeaves();
@@ -125,26 +127,36 @@ export default function CustomizedTables() {
 
     const handleClickOpen = () => {
         setOpen(true);
-      };
+    };
     
-      const handleClose = () => {
+    const handleClose = () => {
         setOpen(false);
-      };
+    };
+
+    const getDescription = (data) => {
+        console.log(data);
+        setDescription(data);     
+    }  
 
     return (
         <div className={classes.parentDiv}>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogContent>
-                <LeaveForm/>
-            </DialogContent>
-            <DialogActions>
-            <Button onClick={handleClose} color="primary">
-                Cancel
-            </Button>
-            <Button onClick={handleClose} color="primary">
-                Subscribe
-            </Button>
-            </DialogActions>
+                <DialogContent>
+                    <LeaveForm description={getDescription}/>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    className={classes.button}
+                    startIcon={<SaveIcon />}>
+                        Save
+                    </Button>
+                </DialogActions>
             </Dialog>
             <div className={classes.upperChild}>
                 <Heading text='LEAVES' />
