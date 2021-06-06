@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
 export default function LeaveForm(props) {
     const classes = useStyles();
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));]
+    const [selectedStartDate, setSelectedStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [selectedEndDate, setSelectedEndDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [description, setDescription] = React.useState('');
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
@@ -43,8 +45,16 @@ export default function LeaveForm(props) {
         sendData();
     }, []);
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    const handleStartDateChange = (date) => {
+        setSelectedStartDate(date);
+    };
+
+    const handleEndDateChange = (date) => {
+        setSelectedEndDate(date);
+    };
+
+    const handleDescriptionChange = (descriptionData) => {
+        setDescription(descriptionData);
     };
 
     const sendData = () => {
@@ -69,8 +79,8 @@ export default function LeaveForm(props) {
                             margin="normal"
                             id="date-picker-inline"
                             label="Start Date"
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            value={selectedStartDate}
+                            onChange={handleStartDateChange}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
@@ -84,8 +94,8 @@ export default function LeaveForm(props) {
                             margin="normal"
                             id="date-picker-inline"
                             label="End Date"
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            value={selectedEndDate}
+                            onChange={handleEndDateChange}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
@@ -98,8 +108,10 @@ export default function LeaveForm(props) {
                     id="outlined-multiline-static"
                     label="Description"
                     multiline
-                    rows={8}
+                    rows={6}
                     variant="outlined"
+                    value={description}
+                    onChange={handleDescriptionChange}
                     fullWidth
                 />
             </Grid>
