@@ -20,7 +20,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-// import LeaveForm from '../../Tables/Employee/LeaveForm';
+import LeaveForm from '../../Tables/Employee/LeaveForm';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -135,7 +135,7 @@ export default function CustomizedTables() {
         <div className={classes.parentDiv}>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogContent>
-                {/* <LeaveForm/> */}
+                <LeaveForm/>
             </DialogContent>
             <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -145,7 +145,7 @@ export default function CustomizedTables() {
                 Subscribe
             </Button>
             </DialogActions>
-      </Dialog>
+            </Dialog>
             <div className={classes.upperChild}>
                 <Heading text='LEAVES' />
             </div>
