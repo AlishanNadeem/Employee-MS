@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
-import Login from '../../Forms/Login/Login'
+import Login from '../../Assets/Forms/Login/Login'
 
 class Home extends Component {
     render() {
