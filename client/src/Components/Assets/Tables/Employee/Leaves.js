@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -13,6 +14,13 @@ import Paper from '@material-ui/core/Paper';
 import Axios from 'axios';
 import Loader from '../../Loader';
 import Heading from '../../Heading';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+// import LeaveForm from '../../Tables/Employee/LeaveForm';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -77,6 +85,7 @@ export default function CustomizedTables() {
     const classes = useStyles();
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         getLeaves();
@@ -99,8 +108,44 @@ export default function CustomizedTables() {
             })
     }
 
+    const deleteLeave = (id) => {
+        Axios.post(`http://localhost:5000/employee/deleteLeaveRequest/${id}`, null, {
+            headers: {
+                'x-access-token': localStorage.getItem('x-access-token')
+            }
+        })
+            .then((res) => {
+                console.log(res.data);
+                getLeaves();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+
     return (
         <div className={classes.parentDiv}>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <DialogContent>
+                {/* <LeaveForm/> */}
+            </DialogContent>
+            <DialogActions>
+            <Button onClick={handleClose} color="primary">
+                Cancel
+            </Button>
+            <Button onClick={handleClose} color="primary">
+                Subscribe
+            </Button>
+            </DialogActions>
+      </Dialog>
             <div className={classes.upperChild}>
                 <Heading text='LEAVES' />
             </div>
@@ -150,15 +195,18 @@ export default function CustomizedTables() {
                                                                         color="primary"
                                                                         size="small"
                                                                         className={classes.button}
-                                                                        startIcon={<CloudUploadIcon />}>
+                                                                        startIcon={<CloudUploadIcon />}
+                                                                        onClick={handleClickOpen}>
                                                                         Update
+                                                                        
                                                                 </Button>
                                                                     <Button
                                                                         variant="contained"
                                                                         color="secondary"
                                                                         size="small"
                                                                         className={classes.button}
-                                                                        startIcon={<DeleteIcon />}>
+                                                                        startIcon={<DeleteIcon />}
+                                                                        onClick={() => deleteLeave(leave._id)}>
                                                                         Delete
                                                             </Button>
                                                                 </React.Fragment>

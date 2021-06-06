@@ -5,6 +5,7 @@ import './Employee.css';
 import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
 import PendingProject from '../../Assets/Tables/Employee/PendingProject';
 import Leaves from '../../Assets/Tables/Employee/Leaves';
+import LeaveForm from '../../Assets/Tables/Employee/LeaveForm';
 
 class Employee extends Component {
     render() {
@@ -19,9 +20,9 @@ class Employee extends Component {
                     </div>
                     <div className="Component-Div">
                         <div className="Content-Div">
-                            <ProjectTable />
+                            {/* <ProjectTable /> */}
                             {/* <PendingProject /> */}
-                            {/* <Leaves /> */}
+                            <Leaves />
                         </div>
                     </div>
                 </div>
