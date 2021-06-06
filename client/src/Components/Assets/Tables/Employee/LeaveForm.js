@@ -37,20 +37,19 @@ export default function LeaveForm(props) {
     const [selectedStartDate, setSelectedStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [selectedEndDate, setSelectedEndDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [description, setDescription] = React.useState('');
-    const [leaves, setLeaves] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
-        sendData();
+        return() => { //componentWillUnmoint
+            sendData();
+        }
     }, []);
 
-    const handleStartDateChange = (date) => {
-        setSelectedStartDate(date);
+    const handleStartDateChange = (startDate) => {
+        setSelectedStartDate(startDate);
     };
 
-    const handleEndDateChange = (date) => {
-        setSelectedEndDate(date);
+    const handleEndDateChange = (endDate) => {
+        setSelectedEndDate(endDate);
     };
 
     const handleDescriptionChange = (descriptionData) => {
@@ -58,7 +57,7 @@ export default function LeaveForm(props) {
     };
 
     const sendData = () => {
-        props.description("Child data here");
+        props.description(description);
     }
 
     return (
@@ -116,6 +115,5 @@ export default function LeaveForm(props) {
                 />
             </Grid>
         </div>
-
     );
 }
