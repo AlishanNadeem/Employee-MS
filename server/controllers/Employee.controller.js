@@ -114,7 +114,7 @@ exports.employeeLogin = ((req, res, next) => {
         if (!passwordValidity) return res.status(401).send({ auth: false, token: null })
 
         var token = jwt.sign({ id: employee._id }, config.secret, {
-            expiresIn: 3600 // expires in 1 hours
+            expiresIn: 7200 // expires in 2 hours
         });
 
         res.status(200).send({ auth: true, token: token });

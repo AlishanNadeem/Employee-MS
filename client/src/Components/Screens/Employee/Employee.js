@@ -4,6 +4,7 @@ import './Employee.css';
 // import NavBar from '../../Assets/NavBar/NavBar';
 import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
 import PendingProject from '../../Assets/Tables/Employee/PendingProject';
+import Leaves from '../../Assets/Tables/Employee/Leaves';
 
 class Employee extends Component {
     render() {
@@ -17,12 +18,10 @@ class Employee extends Component {
                         {/* <NavBar /> */}
                     </div>
                     <div className="Component-Div">
-                        <div className="Breadcrumbs-Div">
-                            <h2>Project history Temp</h2>
-                        </div>
                         <div className="Content-Div">
-                            {/* <ProjectTable /> */}
-                            <PendingProject />
+                            <ProjectTable />
+                            {/* <PendingProject /> */}
+                            {/* <Leaves /> */}
                         </div>
                     </div>
                 </div>

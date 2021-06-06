@@ -9,8 +9,26 @@ import Typography from '@material-ui/core/Typography';
 import Loader from '../../Loader';
 import Axios from 'axios';
 import SnackBar from '../../Snackbar';
+import Heading from '../../Heading';
 
 const useStyles = makeStyles({
+    parentDiv: {
+        display: 'flex',
+        flex: 1,
+        width: '100%',
+        flexDirection: 'column',
+    },
+    upperChild: {
+        display: 'flex',
+        flex: 0.1,
+        width: '100%',
+        flexDirection: 'column',
+    },
+    lowerChild: {
+        display: 'flex',
+        flex: 0.9,
+        width: '100%',
+    },
     root: {
         margin: '20px',
         width: 345,
@@ -59,7 +77,7 @@ export default function MediaCard() {
             .then((res) => {
                 console.log(res.data);
                 setIsClicked(true);
-                getPendingProjects();            
+                getPendingProjects();
             })
             .catch((error) => {
                 console.log(error);
@@ -67,42 +85,48 @@ export default function MediaCard() {
     }
 
     return (
-        isLoaded === false ? (<Loader />) :
-            (
-                pendingProjects.length > 0 ?
-                    (
-                        pendingProjects.map((projects) => (
-                            <Card className={classes.root} key={projects.description}>
-                                <CardActionArea>
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {projects.description}
-                                        </Typography>
-                                        <Typography gutterBottom variant="body1" component="p">
-                                            {projects.description}
-                                        </Typography>
-                                        <Typography gutterBottom variant="body1" component="p">
-                                            {projects.startDate}
-                                        </Typography>
-                                        <Typography gutterBottom variant="body2" component="p">
-                                            Status : {projects.status}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                                <CardActions className={classes.cardAction}>
-                                    <Button size="small" variant="outlined" color="secondary" onClick={() => { handleClick(projects._id) }}>
-                                        Submit
+        <div className={classes.parentDiv}>
+            <div className={classes.upperChild}>
+                <Heading text='Pending Projects' />
+            </div>
+            <div className={classes.lowerChild}>
+                {
+                    isLoaded === false ? (<Loader />) :
+                        (
+                            pendingProjects.length > 0 ?
+                                (
+                                    pendingProjects.map((projects) => (
+                                        <Card className={classes.root} key={projects.description}>
+                                            <CardActionArea>
+                                                <CardContent>
+                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                        {projects.description}
+                                                    </Typography>
+                                                    <Typography gutterBottom variant="body1" component="p">
+                                                        {projects.description}
+                                                    </Typography>
+                                                    <Typography gutterBottom variant="body1" component="p">
+                                                        {projects.startDate}
+                                                    </Typography>
+                                                    <Typography gutterBottom variant="body2" component="p">
+                                                        Status : {projects.status}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                            <CardActions className={classes.cardAction}>
+                                                <Button size="small" variant="outlined" color="secondary" onClick={() => { handleClick(projects._id) }}>
+                                                    Submit
                                     </Button>
-                                </CardActions>
-                                {
-                                    isClicked === true ? (<SnackBar message="Submitted" />) : null
-                                }
-                            </Card>
-                        ))
-                    ) :
-                    (
-                        <h2>No Pending Projects in Queue</h2>
-                    )
-            )
+                                            </CardActions>
+                                            {
+                                                isClicked === true ? (<SnackBar message="Submitted" />) : null
+                                            }
+                                        </Card>
+                                    ))
+                                ) : (<Heading text="No Pending Project in Queue" />)
+                        )
+                }
+            </div>
+        </div>
     );
 }

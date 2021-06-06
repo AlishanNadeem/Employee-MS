@@ -62,7 +62,7 @@
 
 .Content-Div{
     display: flex;
-    flex: 0.9;
+    flex: 1;
     margin: 10px;
     background-color: white;
 }
