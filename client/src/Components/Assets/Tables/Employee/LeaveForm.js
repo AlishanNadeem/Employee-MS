@@ -51,9 +51,9 @@ export default function LeaveForm() {
                 </Typography>
             </Grid>
             <Divider />
-            <Grid container spacing={3} alignItems="flex-end" style={{ marginTop: '20px' }}>
+            <Grid container spacing={3} style={{ marginTop: '20px' }}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid item>
+                    <Grid item md={true} sm={true} xs={true}>
                         <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
@@ -68,7 +68,7 @@ export default function LeaveForm() {
                             }}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item md={true} sm={true} xs={true}>
                         <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
@@ -84,6 +84,16 @@ export default function LeaveForm() {
                         />
                     </Grid>
                 </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid container justify="center" style={{ marginTop: '30px' }}>
+                <TextField
+                    id="outlined-multiline-static"
+                    label="Description"
+                    multiline
+                    rows={8}
+                    variant="outlined"
+                    fullWidth
+                />
             </Grid>
             <Grid container justify="center" style={{ marginTop: '10px' }}>
                 <Button variant="contained" color="secondary" size="large" style={{ textTransform: "none" }}>Login</Button>
