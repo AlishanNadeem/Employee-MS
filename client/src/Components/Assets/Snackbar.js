@@ -19,18 +19,15 @@ export default function SnackBar(props) {
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'right',
                 }}
                 open={open}
-                autoHideDuration={6000}
+                autoHideDuration={4000}
                 onClose={handleClose}
                 message={props.message}
                 action={
                     <React.Fragment>
-                        <Button color="secondary" size="small" onClick={handleClose}>
-                            UNDO
-                         </Button>
-                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                        <IconButton size="small" aria-label="close" color="secondary" onClick={handleClose}>
                             <CloseIcon fontSize="small" />
                         </IconButton>
                     </React.Fragment>

@@ -50,8 +50,20 @@ export default function MediaCard() {
             })
     }
 
-    const handleClick = () => {
-        setIsClicked(true);
+    const handleClick = (id) => {
+        Axios.post(`http://localhost:5000/employee/submitProject/${id}`, null, {
+            headers: {
+                'x-access-token': localStorage.getItem('x-access-token')
+            }
+        })
+            .then((res) => {
+                console.log(res.data);
+                setIsClicked(true);
+                getPendingProjects();            
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     return (
@@ -78,7 +90,7 @@ export default function MediaCard() {
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions className={classes.cardAction}>
-                                    <Button size="small" variant="outlined" color="secondary" onClick={handleClick}>
+                                    <Button size="small" variant="outlined" color="secondary" onClick={() => { handleClick(projects._id) }}>
                                         Submit
                                     </Button>
                                 </CardActions>
