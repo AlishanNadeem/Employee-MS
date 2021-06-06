@@ -14,7 +14,7 @@ function App() {
         </Route>
         <Route path='/employee' component={Employee} />
         {/* <Route to='/admin' component={}> */}
-        <Route component={Error} />
+        <Route component={Error} /> 
       </Switch>
     </div>
   );

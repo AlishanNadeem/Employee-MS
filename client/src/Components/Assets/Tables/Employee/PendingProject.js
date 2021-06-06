@@ -42,12 +42,12 @@ export default function MediaCard() {
             .then((res) => {
                 console.log(res.data);
                 const getPendingProjects = res.data;
-                setIsLoaded(true);
                 setPendingProjects(getPendingProjects);
+                setIsLoaded(true);
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
     }
 
     const handleClick = (id) => {
