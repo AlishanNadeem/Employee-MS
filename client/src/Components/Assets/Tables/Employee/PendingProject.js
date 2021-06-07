@@ -9,8 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Loader from '../../Loader';
 import Axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import { Alert } from '@material-ui/lab';
 import Heading from '../../Heading';
 
 const useStyles = makeStyles({
@@ -95,20 +94,12 @@ export default function MediaCard() {
 
     return (
         <div className={classes.parentDiv}>
-            <Snackbar
-                anchorOrigin={{vertical: 'bottom', horizontal: 'right',}}
-                open={isSubmitted}
-                autoHideDuration={3000}
-                onClose={handleSnackbarClose}
-                message="Project Successfully Submitted"
-                action={
-                    <React.Fragment>
-                        <IconButton size="small" aria-label="close" color="secondary" onClick={handleSnackbarClose}>
-                            <CloseIcon fontSize="small" />
-                        </IconButton>
-                    </React.Fragment>
-                }
-            />
+            <Snackbar  anchorOrigin={{vertical: 'bottom', horizontal: 'right',}} 
+                open={isSubmitted} autoHideDuration={3000} onClose={handleSnackbarClose}>
+                <Alert onClose={handleSnackbarClose} severity="success">
+                    Project Submitted Successfully
+                </Alert>
+            </Snackbar>
             <div className={classes.upperChild}>
                 <Heading text='Pending Projects' />
             </div>
