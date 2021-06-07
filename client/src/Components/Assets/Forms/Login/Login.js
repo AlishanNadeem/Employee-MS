@@ -50,6 +50,7 @@ class Login extends React.Component {
 
     onChangeEmployeeId(e) {
         this.setState({ employeeId: e.target.value })
+        console.log(this.state.employeeId);
     }
 
     onChangePassword(e) {

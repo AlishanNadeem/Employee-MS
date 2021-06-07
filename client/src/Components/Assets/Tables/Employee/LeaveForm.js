@@ -1,20 +1,14 @@
 import 'date-fns';
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {
     Grid,
     TextField,
-    Button,
-    FormControlLabel,
-    Checkbox,
-    Avatar,
     Typography,
     Divider,
 } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { Face, Fingerprint } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -36,7 +30,7 @@ export default function LeaveForm(props) {
 
     const [selectedStartDate, setSelectedStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [selectedEndDate, setSelectedEndDate] = React.useState(new Date('2014-08-18T21:11:54'));
-    const [description, setDescription] = React.useState('');
+    const [description, setDescription] = React.useState("");
 
     useEffect(() => {
         return() => { //componentWillUnmoint
@@ -52,8 +46,10 @@ export default function LeaveForm(props) {
         setSelectedEndDate(endDate);
     };
 
-    const handleDescriptionChange = (descriptionData) => {
-        setDescription(descriptionData);
+    const handleDescriptionChange = (e) => {
+        let event = e.target.value;
+        setDescription(event);
+        console.log(description);
     };
 
     const sendData = () => {
@@ -107,7 +103,7 @@ export default function LeaveForm(props) {
                     id="outlined-multiline-static"
                     label="Description"
                     multiline
-                    rows={6}
+                    rows={4}
                     variant="outlined"
                     value={description}
                     onChange={handleDescriptionChange}
