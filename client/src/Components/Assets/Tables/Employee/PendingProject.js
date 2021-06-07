@@ -98,7 +98,7 @@ export default function MediaCard() {
             <Snackbar
                 anchorOrigin={{vertical: 'bottom', horizontal: 'right',}}
                 open={isSubmitted}
-                autoHideDuration={4000}
+                autoHideDuration={3000}
                 onClose={handleSnackbarClose}
                 message="Project Successfully Submitted"
                 action={

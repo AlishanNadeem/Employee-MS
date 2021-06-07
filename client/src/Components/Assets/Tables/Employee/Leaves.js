@@ -11,9 +11,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Alert } from '@material-ui/lab';
 import Axios from 'axios';
 import Loader from '../../Loader';
 import Heading from '../../Heading';
+import Snackbar from '@material-ui/core/Snackbar';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -84,10 +86,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedTables() {
     const classes = useStyles();
+    
+    const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [description, setDescription] = React.useState({});
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setIsDeleted(false);
+    };
 
     useEffect(() => {
         getLeaves();
@@ -117,8 +128,10 @@ export default function CustomizedTables() {
             }
         })
             .then((res) => {
+                setIsDeleted(true);
                 console.log(res.data);
                 getLeaves();
+                
             })
             .catch((error) => {
                 console.log(error);
@@ -140,6 +153,12 @@ export default function CustomizedTables() {
 
     return (
         <div className={classes.parentDiv}>
+            <Snackbar  anchorOrigin={{vertical: 'bottom', horizontal: 'right',}} 
+                open={isDeleted} autoHideDuration={3000} onClose={handleSnackbarClose}>
+                <Alert onClose={handleSnackbarClose} severity="error">
+                    Leave Deleted Successfully
+                </Alert>
+            </Snackbar>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogContent>
                     <LeaveForm description={getDescription}/>
