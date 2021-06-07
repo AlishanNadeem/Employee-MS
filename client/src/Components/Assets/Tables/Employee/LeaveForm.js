@@ -47,9 +47,7 @@ export default function LeaveForm(props) {
     };
 
     const handleDescriptionChange = (e) => {
-        let event = e.target.value;
-        setDescription(event);
-        console.log(description);
+        setDescription(e.target.value);
     };
 
     const sendData = () => {
@@ -104,7 +102,6 @@ export default function LeaveForm(props) {
                     label="Description"
                     multiline
                     rows={4}
-                    variant="outlined"
                     value={description}
                     onChange={handleDescriptionChange}
                     fullWidth

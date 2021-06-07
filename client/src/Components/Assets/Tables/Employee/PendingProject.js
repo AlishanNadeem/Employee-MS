@@ -8,7 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Loader from '../../Loader';
 import Axios from 'axios';
-import SnackBar from '../../Snackbar';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import Heading from '../../Heading';
 
 const useStyles = makeStyles({
@@ -45,7 +47,14 @@ export default function MediaCard() {
 
     const [pendingProjects, setPendingProjects] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setIsSubmitted(false);
+    };
 
     useEffect(() => {
         getPendingProjects();
@@ -76,7 +85,7 @@ export default function MediaCard() {
         })
             .then((res) => {
                 console.log(res.data);
-                setIsClicked(true);
+                setIsSubmitted(true);
                 getPendingProjects();
             })
             .catch((error) => {
@@ -86,6 +95,20 @@ export default function MediaCard() {
 
     return (
         <div className={classes.parentDiv}>
+            <Snackbar
+                anchorOrigin={{vertical: 'bottom', horizontal: 'right',}}
+                open={isSubmitted}
+                autoHideDuration={4000}
+                onClose={handleSnackbarClose}
+                message="Project Successfully Submitted"
+                action={
+                    <React.Fragment>
+                        <IconButton size="small" aria-label="close" color="secondary" onClick={handleSnackbarClose}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    </React.Fragment>
+                }
+            />
             <div className={classes.upperChild}>
                 <Heading text='Pending Projects' />
             </div>
@@ -118,9 +141,6 @@ export default function MediaCard() {
                                                     Submit
                                     </Button>
                                             </CardActions>
-                                            {
-                                                isClicked === true ? (<SnackBar message="Submitted" />) : null
-                                            }
                                         </Card>
                                     ))
                                 ) : (<Heading text="No Pending Project in Queue" />)
