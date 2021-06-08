@@ -6,6 +6,7 @@ import {
     TextField,
     Typography,
     Divider,
+    Button,
 } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -31,15 +32,21 @@ export default function LeaveForm(props) {
     const [selectedStartDate, setSelectedStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [selectedEndDate, setSelectedEndDate] = React.useState(new Date('2014-08-18T21:11:54'));
     const [description, setDescription] = React.useState("");
+    // const [data, setData] = React.useState({
+    //     startDate: null,
+    //     endDate: null,
+    //     description: null
+    // });
 
     useEffect(() => {
         return() => { //componentWillUnmoint
-            sendData();
+            console.log(description)
         }
     }, []);
 
     const handleStartDateChange = (startDate) => {
         setSelectedStartDate(startDate);
+        console.log(selectedStartDate);
     };
 
     const handleEndDateChange = (endDate) => {
@@ -52,6 +59,15 @@ export default function LeaveForm(props) {
 
     const sendData = () => {
         props.description(description);
+    }
+
+    const handleSubmit = () => {
+        // setData({
+        //     startDate: selectedStartDate,
+        //     endDate: selectedEndDate,
+        //     description: description
+        // });
+        console.log(description);
     }
 
     return (
@@ -106,6 +122,7 @@ export default function LeaveForm(props) {
                     onChange={handleDescriptionChange}
                     fullWidth
                 />
+                <Button onClick={handleSubmit}>Submit</Button>
             </Grid>
         </div>
     );

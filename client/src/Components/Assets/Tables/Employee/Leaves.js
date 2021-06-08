@@ -21,7 +21,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import LeaveForm from '../../Tables/Employee/LeaveForm';
 import SaveIcon from '@material-ui/icons/Save';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import SendIcon from '@material-ui/icons/Send';
 import {Grid} from '@material-ui/core';
+import AddLeave from './AddLeave';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -88,7 +90,6 @@ export default function CustomizedTables() {
     const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [open, setOpen] = React.useState(false);
     const [onClickAdd, setOnClickAdd] = React.useState(false);
     const [onClickUpdate, setOnClickUpdate] = React.useState(false);
     const [description, setDescription] = React.useState({});
@@ -138,29 +139,23 @@ export default function CustomizedTables() {
             })
     }
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickAdd = () => {
+        setOnClickAdd(true);
     };
-    
-    const handleClose = () => {
-        setOpen(false);
-        setOnClickAdd(false);
-        setOnClickUpdate(false);
+
+    const handleClickUpdate = () => {
+        setOnClickUpdate(true);
+    };
+
+    const handleClose = (data) => {
+        setOnClickAdd(data);
+        setOnClickUpdate(data);
+        getLeaves();
     };
 
     const getDescription = (data) => {
         console.log(data);
         setDescription(data);     
-    } 
-
-    const handleClickAdd = () => {
-        setOnClickAdd(true);
-        handleClickOpen();
-    };
-
-    const handleClickUpdate = () => {
-        setOnClickUpdate(true);
-        handleClickOpen();
     };
 
     return (
@@ -171,29 +166,33 @@ export default function CustomizedTables() {
                     Leave Deleted Successfully
                 </Alert>
             </Snackbar>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogContent>
-                    {
-                        onClickAdd === true ? <LeaveForm heading='Add New Leave' description={getDescription}/> : null
-                    }
-                    {
-                        onClickUpdate === true ? <LeaveForm heading='Update Leave' description={getDescription}/> : null
-                    }
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    className={classes.button}
-                    startIcon={<SaveIcon />}>
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            {
+                onClickAdd === true ? 
+                <Dialog open={onClickAdd} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <AddLeave dialogClose = {handleClose}/>
+                </Dialog> : null
+            }
+            {
+                onClickUpdate === true ? 
+                <Dialog open={onClickUpdate} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <DialogContent>
+                        <LeaveForm heading='Update Leave' description={getDescription}/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            size="medium"
+                            className={classes.button}
+                            startIcon={<SaveIcon />}>
+                                Save
+                        </Button>
+                    </DialogActions>
+                </Dialog> : null
+            }
             <div className={classes.upperChild}>
                 <Heading text='LEAVES' />
             </div>
