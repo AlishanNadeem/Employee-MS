@@ -8,6 +8,8 @@ router.get('/viewProfile', loginValidation, employee_controller.viewProfile); //
 
 router.get('/viewLeaves', loginValidation, employee_controller.viewLeaves);
 
+router.get('/viewLeaveRequest/:id', loginValidation, employee_controller.viewLeaveRequest);
+
 router.post('/addLeaveRequest', loginValidation, employee_controller.addLeaveRequest);
 
 router.post('/updateLeaveRequest/:id',loginValidation, employee_controller.updateLeaveRequest);

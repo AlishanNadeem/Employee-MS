@@ -53,6 +53,14 @@ exports.addLeaveRequest = ((req, res, next) => {
     res.send("Leave Request Added");
 });
 
+exports.viewLeaveRequest = ((req, res, next) => {
+    Leave.findById(req.params.id, (err, leave) => {
+        if (err) return next(err);
+
+        res.send(leave);
+    });
+});
+
 exports.updateLeaveRequest = ((req, res, next) => {
     Leave.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
         if (err) return next(err);
