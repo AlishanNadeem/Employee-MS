@@ -58,7 +58,7 @@ export default function LeaveForm(props) {
         <div className={classes.margin}>
             <Grid container justify="center">
                 <Typography variant="h4" className={classes.color} gutterBottom>
-                    Update Leave
+                    {props.heading}
                 </Typography>
             </Grid>
             <Divider />

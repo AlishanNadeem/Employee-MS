@@ -21,8 +21,8 @@ class Employee extends Component {
                     <div className="Component-Div">
                         <div className="Content-Div">
                             {/* <ProjectTable /> */}
-                            <PendingProject />
-                            {/* <Leaves /> */}
+                            {/* <PendingProject /> */}
+                            <Leaves />
                         </div>
                     </div>
                 </div>

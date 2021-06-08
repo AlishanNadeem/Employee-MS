@@ -20,6 +20,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import LeaveForm from '../../Tables/Employee/LeaveForm';
 import SaveIcon from '@material-ui/icons/Save';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import {Grid} from '@material-ui/core';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -87,6 +89,8 @@ export default function CustomizedTables() {
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
+    const [onClickAdd, setOnClickAdd] = React.useState(false);
+    const [onClickUpdate, setOnClickUpdate] = React.useState(false);
     const [description, setDescription] = React.useState({});
 
     const handleSnackbarClose = (event, reason) => {
@@ -140,12 +144,24 @@ export default function CustomizedTables() {
     
     const handleClose = () => {
         setOpen(false);
+        setOnClickAdd(false);
+        setOnClickUpdate(false);
     };
 
     const getDescription = (data) => {
         console.log(data);
         setDescription(data);     
-    }  
+    } 
+
+    const handleClickAdd = () => {
+        setOnClickAdd(true);
+        handleClickOpen();
+    };
+
+    const handleClickUpdate = () => {
+        setOnClickUpdate(true);
+        handleClickOpen();
+    };
 
     return (
         <div className={classes.parentDiv}>
@@ -157,7 +173,12 @@ export default function CustomizedTables() {
             </Snackbar>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogContent>
-                    <LeaveForm description={getDescription}/>
+                    {
+                        onClickAdd === true ? <LeaveForm heading='Add New Leave' description={getDescription}/> : null
+                    }
+                    {
+                        onClickUpdate === true ? <LeaveForm heading='Update Leave' description={getDescription}/> : null
+                    }
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -178,6 +199,18 @@ export default function CustomizedTables() {
             </div>
             <div className={classes.lowerChild}>
                 <TableContainer component={Paper}>
+                <Grid container justify="flex-end">
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        size="medium"
+                        className={classes.button}
+                        startIcon={<AddCircleIcon />}
+                        onClick={handleClickAdd}>
+                            Add New                                                
+                    </Button>
+                </Grid>
+                    
                     {
                         isLoaded === false ? (<Loader />) : (
                             <Table aria-label="customized table">
@@ -223,7 +256,7 @@ export default function CustomizedTables() {
                                                                         size="small"
                                                                         className={classes.button}
                                                                         startIcon={<CloudUploadIcon />}
-                                                                        onClick={handleClickOpen}>
+                                                                        onClick={handleClickUpdate}>
                                                                         Update
                                                                         
                                                                 </Button>
