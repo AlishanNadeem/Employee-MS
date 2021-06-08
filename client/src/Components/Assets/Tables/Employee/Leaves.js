@@ -18,12 +18,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import LeaveForm from '../../Tables/Employee/LeaveForm';
 import SaveIcon from '@material-ui/icons/Save';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import SendIcon from '@material-ui/icons/Send';
 import {Grid} from '@material-ui/core';
 import AddLeave from './AddLeave';
+import UpdateLeave from './UpdateLeave';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -87,11 +86,13 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedTables() {
     const classes = useStyles();
     
+    // const selectedLeave = new Object();
     const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [onClickAdd, setOnClickAdd] = React.useState(false);
     const [onClickUpdate, setOnClickUpdate] = React.useState(false);
+    const [selectedLeave, setSelectedLeave] = React.useState({});
     const [description, setDescription] = React.useState({});
 
     const handleSnackbarClose = (event, reason) => {
@@ -139,12 +140,43 @@ export default function CustomizedTables() {
             })
     }
 
+    const viewLeave = (id) => {
+        Axios.get(`http://localhost:5000/employee/viewLeaveRequest/${id}`, {
+            headers: {
+                'x-access-token': localStorage.getItem('x-access-token')
+            }
+        })
+            .then((res) => {
+                const selectedLeave = {
+                    id: res.data._id,   
+                    startDate: res.data.startDate,
+                    endDate: res.data.endDate,
+                    description: res.data.description,
+                };
+                // selectedLeave.id = res.data._id;
+                // selectedLeave.startDate = res.data.startDate;
+                // selectedLeave.endDate = res.data.endDate;
+                // selectedLeave.description = res.data.description;
+                // setSelectedLeave({
+                //     id: res.data._id,   
+                //     startDate: res.data.startDate,
+                //     endDate: res.data.endDate,
+                //     description: res.data.description,
+                // });
+                console.log(selectedLeave);
+                setOnClickUpdate(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     const handleClickAdd = () => {
         setOnClickAdd(true);
     };
 
-    const handleClickUpdate = () => {
-        setOnClickUpdate(true);
+    const handleClickUpdate = (e) => {
+        viewLeave(e);
     };
 
     const handleClose = (data) => {
@@ -175,22 +207,7 @@ export default function CustomizedTables() {
             {
                 onClickUpdate === true ? 
                 <Dialog open={onClickUpdate} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <DialogContent>
-                        <LeaveForm heading='Update Leave' description={getDescription}/>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="medium"
-                            className={classes.button}
-                            startIcon={<SaveIcon />}>
-                                Save
-                        </Button>
-                    </DialogActions>
+                    <UpdateLeave dialogClose = {handleClose} selectedLeave = {selectedLeave}/>
                 </Dialog> : null
             }
             <div className={classes.upperChild}>
@@ -255,7 +272,7 @@ export default function CustomizedTables() {
                                                                         size="small"
                                                                         className={classes.button}
                                                                         startIcon={<CloudUploadIcon />}
-                                                                        onClick={handleClickUpdate}>
+                                                                        onClick={() => handleClickUpdate(leave._id)}>
                                                                         Update
                                                                         
                                                                 </Button>

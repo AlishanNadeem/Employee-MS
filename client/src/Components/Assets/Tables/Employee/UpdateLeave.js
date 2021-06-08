@@ -1,6 +1,6 @@
 import 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {
     Grid,
     TextField,
@@ -10,8 +10,9 @@ import {
 } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { DialogActions, DialogContent} from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import SaveIcon from '@material-ui/icons/Save';
 import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,8 @@ export default function AddLeave(props) {
     const [open, setOpen] = React.useState(true);
 
     useEffect(() => {
+        setDescription(props.selectedLeave.description);
+        console.log(description);
         return () => { //componentWillUnmoint
             // console.log(description)
         }
@@ -56,14 +59,14 @@ export default function AddLeave(props) {
     };
 
     const handleSubmit = () => {
-        addLeave();
+        updateLeave();
     }
 
     const handleClose = () => {
         props.dialogClose(false);
     }
 
-    const addLeave = () => {
+    const updateLeave = () => {
         const data = {
             startDate: selectedStartDate,
             endDate: selectedEndDate,
@@ -71,7 +74,7 @@ export default function AddLeave(props) {
         }
         console.log(data);
 
-        Axios.post(`http://localhost:5000/employee/addLeaveRequest`, data, {
+        Axios.post(`http://localhost:5000/employee/updateLeaveRequest/${props.selectedLeave.id}`, data, {
             headers: {
                 'x-access-token': localStorage.getItem('x-access-token')
             }
@@ -91,7 +94,7 @@ export default function AddLeave(props) {
                 <div className={classes.margin}>
                     <Grid container justify="center">
                         <Typography variant="h4" className={classes.color} gutterBottom>
-                            Add New Leave
+                            Update Leave
                         </Typography>
                     </Grid>
                     <Divider />
@@ -145,16 +148,16 @@ export default function AddLeave(props) {
             <DialogActions>
                 <Button color="primary" onClick={handleClose}>
                     Cancel
-                        </Button>
+                </Button>
                 <Button
                     variant="contained"
                     color="primary"
                     size="medium"
                     className={classes.button}
-                    startIcon={<SendIcon />}
+                    startIcon={<SaveIcon />}
                     onClick={handleSubmit}>
-                    Submit
-                        </Button>
+                    Save
+                </Button>
             </DialogActions>
         </React.Fragment>
     );
