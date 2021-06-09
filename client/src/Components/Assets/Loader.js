@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
     justifyContent: 'center',
     flex: 1,
-    marginTop: '30px',
+    marginTop: '25%',
     position: 'relative'
   },
 }));

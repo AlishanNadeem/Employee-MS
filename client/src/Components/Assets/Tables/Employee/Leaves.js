@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -11,14 +12,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Alert } from '@material-ui/lab';
-import Axios from 'axios';
 import Loader from '../../Loader';
 import Heading from '../../Heading';
 import Snackbar from '@material-ui/core/Snackbar';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import SaveIcon from '@material-ui/icons/Save';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {Grid} from '@material-ui/core';
 import AddLeave from './AddLeave';
@@ -86,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedTables() {
     const classes = useStyles();
     
-    // const selectedLeave = new Object();
     const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -147,22 +143,12 @@ export default function CustomizedTables() {
             }
         })
             .then((res) => {
-                const selectedLeave = {
+                setSelectedLeave({
                     id: res.data._id,   
                     startDate: res.data.startDate,
                     endDate: res.data.endDate,
                     description: res.data.description,
-                };
-                // selectedLeave.id = res.data._id;
-                // selectedLeave.startDate = res.data.startDate;
-                // selectedLeave.endDate = res.data.endDate;
-                // selectedLeave.description = res.data.description;
-                // setSelectedLeave({
-                //     id: res.data._id,   
-                //     startDate: res.data.startDate,
-                //     endDate: res.data.endDate,
-                //     description: res.data.description,
-                // });
+                });
                 console.log(selectedLeave);
                 setOnClickUpdate(true);
             })

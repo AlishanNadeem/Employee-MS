@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 let leaveSchema = new Schema({
     empOId: { type: Schema.Types.ObjectId },
-    startDate: { type: String },
-    endDate: { type: String },
+    startDate: { type: Date },
+    endDate: { type: Date },
     description: { type: String },
     status: { type: String, default: "Pending" }
 });

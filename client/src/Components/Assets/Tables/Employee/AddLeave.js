@@ -1,5 +1,5 @@
 import 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Grid,
@@ -32,16 +32,9 @@ const useStyles = makeStyles((theme) => ({
 export default function AddLeave(props) {
     const classes = useStyles();
 
-    const [selectedStartDate, setSelectedStartDate] = React.useState(new Date('2020-08-18'));
-    const [selectedEndDate, setSelectedEndDate] = React.useState(new Date('2014-08-18'));
-    const [description, setDescription] = React.useState("");
-    const [open, setOpen] = React.useState(true);
-
-    useEffect(() => {
-        return () => { //componentWillUnmoint
-            // console.log(description)
-        }
-    }, []);
+    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+    const [selectedEndDate, setSelectedEndDate] = useState(new Date());
+    const [description, setDescription] = useState("");
 
     const handleStartDateChange = (startDate) => {
         setSelectedStartDate(startDate);
@@ -101,7 +94,7 @@ export default function AddLeave(props) {
                                 <KeyboardDatePicker
                                     disableToolbar
                                     variant="inline"
-                                    format="MM/dd/yyyy"
+                                    format="dd/MM/yyyy"
                                     margin="normal"
                                     id="date-picker-inline"
                                     label="Start Date"
@@ -116,7 +109,7 @@ export default function AddLeave(props) {
                                 <KeyboardDatePicker
                                     disableToolbar
                                     variant="inline"
-                                    format="MM/dd/yyyy"
+                                    format="dd/MM/yyyy"
                                     margin="normal"
                                     id="date-picker-inline"
                                     label="End Date"

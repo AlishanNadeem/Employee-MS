@@ -1,6 +1,7 @@
 import 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
 import {
     Grid,
     TextField,
@@ -10,10 +11,8 @@ import {
 } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
+import { DialogActions, DialogContent } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
-import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -33,18 +32,38 @@ const useStyles = makeStyles((theme) => ({
 export default function AddLeave(props) {
     const classes = useStyles();
 
-    const [selectedStartDate, setSelectedStartDate] = React.useState(new Date('2020-08-18'));
-    const [selectedEndDate, setSelectedEndDate] = React.useState(new Date('2014-08-18'));
-    const [description, setDescription] = React.useState("");
-    const [open, setOpen] = React.useState(true);
+    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+    const [selectedEndDate, setSelectedEndDate] = useState(new Date());
+    const [description, setDescription] = useState("");
 
     useEffect(() => {
+        setSelectedStartDate(props.selectedLeave.startDate);
+        setSelectedEndDate(props.selectedLeave.endDate);
         setDescription(props.selectedLeave.description);
-        console.log(description);
-        return () => { //componentWillUnmoint
-            // console.log(description)
-        }
     }, []);
+
+    const updateLeave = () => {
+
+        const data = {
+            startDate: selectedStartDate,
+            endDate: selectedEndDate,
+            description: description,
+        }
+        console.log(data);
+
+        Axios.post(`http://localhost:5000/employee/updateLeaveRequest/${props.selectedLeave.id}`, data, {
+            headers: {
+                'x-access-token': localStorage.getItem('x-access-token')
+            }
+        })
+            .then((res) => {
+                console.log(res);
+                handleClose();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     const handleStartDateChange = (startDate) => {
         setSelectedStartDate(startDate);
@@ -66,27 +85,6 @@ export default function AddLeave(props) {
         props.dialogClose(false);
     }
 
-    const updateLeave = () => {
-        const data = {
-            startDate: selectedStartDate,
-            endDate: selectedEndDate,
-            description: description,
-        }
-        console.log(data);
-
-        Axios.post(`http://localhost:5000/employee/updateLeaveRequest/${props.selectedLeave.id}`, data, {
-            headers: {
-                'x-access-token': localStorage.getItem('x-access-token')
-            }
-        })
-            .then((res) => {
-                console.log(res);
-                props.dialogClose(false);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
 
     return (
         <React.Fragment>
@@ -104,7 +102,7 @@ export default function AddLeave(props) {
                                 <KeyboardDatePicker
                                     disableToolbar
                                     variant="inline"
-                                    format="MM/dd/yyyy"
+                                    format="dd/MM/yyyy"
                                     margin="normal"
                                     id="date-picker-inline"
                                     label="Start Date"
@@ -119,7 +117,7 @@ export default function AddLeave(props) {
                                 <KeyboardDatePicker
                                     disableToolbar
                                     variant="inline"
-                                    format="MM/dd/yyyy"
+                                    format="dd/MM/yyyy"
                                     margin="normal"
                                     id="date-picker-inline"
                                     label="End Date"
