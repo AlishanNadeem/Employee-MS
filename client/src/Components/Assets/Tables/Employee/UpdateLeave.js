@@ -85,7 +85,6 @@ export default function AddLeave(props) {
         props.dialogClose(false);
     }
 
-
     return (
         <React.Fragment>
             <DialogContent>
