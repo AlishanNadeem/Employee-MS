@@ -103,7 +103,6 @@ export default function AddLeave(props) {
                                     variant="inline"
                                     format="dd/MM/yyyy"
                                     margin="normal"
-                                    id="date-picker-inline"
                                     label="Start Date"
                                     value={selectedStartDate}
                                     onChange={handleStartDateChange}
@@ -118,7 +117,6 @@ export default function AddLeave(props) {
                                     variant="inline"
                                     format="dd/MM/yyyy"
                                     margin="normal"
-                                    id="date-picker-inline"
                                     label="End Date"
                                     value={selectedEndDate}
                                     onChange={handleEndDateChange}

@@ -19,6 +19,7 @@ import Dialog from '@material-ui/core/Dialog';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {Grid} from '@material-ui/core';
 import AddLeave from './AddLeave';
+import Backdrop from '@material-ui/core/Backdrop';
 import UpdateLeave from './UpdateLeave';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -78,6 +79,10 @@ const useStyles = makeStyles((theme) => ({
         color: '#003049',
         fontWeight: 'bold',
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      },
 }));
 
 export default function CustomizedTables() {
@@ -86,6 +91,7 @@ export default function CustomizedTables() {
     const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoadedUpdate, setIsLoadedUpdate] = useState(false);
     const [onClickAdd, setOnClickAdd] = React.useState(false);
     const [onClickUpdate, setOnClickUpdate] = React.useState(false);
     const [selectedLeave, setSelectedLeave] = React.useState({});
@@ -151,6 +157,7 @@ export default function CustomizedTables() {
                 });
                 console.log(selectedLeave);
                 setOnClickUpdate(true);
+                setIsLoadedUpdate(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -162,6 +169,7 @@ export default function CustomizedTables() {
     };
 
     const handleClickUpdate = (e) => {
+        setIsLoadedUpdate(true);
         viewLeave(e);
     };
 
@@ -178,6 +186,9 @@ export default function CustomizedTables() {
 
     return (
         <div className={classes.parentDiv}>
+             <Backdrop className={classes.backdrop} open={isLoadedUpdate}>
+                 <Loader />
+             </Backdrop>
             <Snackbar  anchorOrigin={{vertical: 'bottom', horizontal: 'right',}} 
                 open={isDeleted} autoHideDuration={3000} onClose={handleSnackbarClose}>
                 <Alert onClose={handleSnackbarClose} severity="error">
@@ -211,8 +222,7 @@ export default function CustomizedTables() {
                         onClick={handleClickAdd}>
                             Add New                                                
                     </Button>
-                </Grid>
-                    
+                </Grid> 
                     {
                         isLoaded === false ? (<Loader />) : (
                             <Table aria-label="customized table">
