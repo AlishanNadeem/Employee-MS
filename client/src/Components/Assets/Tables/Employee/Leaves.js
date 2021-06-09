@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Table,
+    TableBody, 
+    TableCell, 
+    TableContainer, 
+    TableHead, 
+    TableRow, 
+    Button, 
+    Paper, 
+    Snackbar, 
+    Dialog, 
+    Backdrop, 
+    Grid } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Alert } from '@material-ui/lab';
 import Loader from '../../Loader';
 import Heading from '../../Heading';
-import Snackbar from '@material-ui/core/Snackbar';
-import Dialog from '@material-ui/core/Dialog';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import {Grid} from '@material-ui/core';
 import AddLeave from './AddLeave';
-import Backdrop from '@material-ui/core/Backdrop';
 import UpdateLeave from './UpdateLeave';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
-export default function CustomizedTables() {
+export default function Leaves() {
     const classes = useStyles();
     
     const [isDeleted, setIsDeleted] = React.useState(false);
@@ -179,11 +179,6 @@ export default function CustomizedTables() {
         getLeaves();
     };
 
-    const getDescription = (data) => {
-        console.log(data);
-        setDescription(data);     
-    };
-
     return (
         <div className={classes.parentDiv}>
              <Backdrop className={classes.backdrop} open={isLoadedUpdate}>
@@ -269,7 +264,7 @@ export default function CustomizedTables() {
                                                                         className={classes.button}
                                                                         startIcon={<CloudUploadIcon />}
                                                                         onClick={() => handleClickUpdate(leave._id)}>
-                                                                        Update
+                                                                            Update
                                                                         
                                                                 </Button>
                                                                     <Button
@@ -279,7 +274,7 @@ export default function CustomizedTables() {
                                                                         className={classes.button}
                                                                         startIcon={<DeleteIcon />}
                                                                         onClick={() => deleteLeave(leave._id)}>
-                                                                        Delete
+                                                                            Delete
                                                             </Button>
                                                                 </React.Fragment>
                                                             )
@@ -291,14 +286,14 @@ export default function CustomizedTables() {
                                                                         size="small"
                                                                         className={classes.button}
                                                                         startIcon={<CloudUploadIcon />}>
-                                                                        Update
+                                                                            Update
                                                                 </Button>
                                                                     <Button
                                                                         disabled
                                                                         size="small"
                                                                         className={classes.button}
                                                                         startIcon={<DeleteIcon />}>
-                                                                        Delete
+                                                                            Delete
                                                             </Button>
                                                                 </React.Fragment>
                                                             )
