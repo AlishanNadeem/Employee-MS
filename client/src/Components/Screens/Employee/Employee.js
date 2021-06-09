@@ -6,6 +6,7 @@ import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
 import PendingProject from '../../Assets/Tables/Employee/PendingProject';
 import Leaves from '../../Assets/Tables/Employee/Leaves';
 import LeaveForm from '../../Assets/Tables/Employee/LeaveForm';
+import Profile from '../../Assets/Profile';
 
 class Employee extends Component {
     render() {
@@ -22,7 +23,8 @@ class Employee extends Component {
                         <div className="Content-Div">
                             {/* <ProjectTable /> */}
                             {/* <PendingProject /> */}
-                            <Leaves />
+                            {/* <Leaves /> */}
+                            <Profile/>
                         </div>
                     </div>
                 </div>
