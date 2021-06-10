@@ -26,6 +26,15 @@ class Employee extends Component {
                                 <Route exact path='/employee/leaves'>
                                     <Leaves />
                                 </Route>
+                                <Route exact path='/employee/projects'>
+                                    <ProjectTable />
+                                </Route>
+                                <Route exact path='/employee/pendingProjects'>
+                                    <PendingProject />
+                                </Route>
+                                <Route exact path='/employee/profile'>
+                                    <Profile />
+                                </Route>
                             </Switch>
 
                             {/* <Route path='/employee' Component={Profile} /> */}

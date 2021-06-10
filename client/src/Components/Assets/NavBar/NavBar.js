@@ -38,7 +38,22 @@ export default function ButtonAppBar() {
           </Typography>
           <Button color="inherit">
             <Link to={`${url}/leaves`}>
-              Login
+              leaves
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link to={`${url}/projects`}>
+              projects
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link to={`${url}/pendingProjects`}>
+              pending projects
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link to={`${url}/profile`}>
+              Profile
             </Link>
           </Button>
         </Toolbar>
