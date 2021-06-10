@@ -42,17 +42,27 @@ const useStyles = makeStyles((theme) => ({
     large: {
         width: theme.spacing(15),
         height: theme.spacing(15),
+        fontSize: '50px'
     },
 }));
+
 
 export default function Profile() {
     const classes = useStyles();
 
     const [profile, setProfile] = useState({});
+    const [name, setName] = useState('');
 
     useEffect(() => {
         getProfile();
     }, []);
+
+    function randomColor() {
+        let hex = Math.floor(Math.random() * 0xFFFFFF);
+        let color = "#" + hex.toString(16);
+      
+        return color;
+      }
 
     const getProfile = () => {
         Axios.get(`http://localhost:5000/employee/viewProfile`, {
@@ -64,6 +74,7 @@ export default function Profile() {
                 console.log(res.data);
                 const getProfile = res.data;
                 setProfile(getProfile);
+                setName(res.data.name.charAt(0));
             })
             .catch((error) => {
                 console.log(error);
@@ -78,7 +89,7 @@ export default function Profile() {
             <div className={classes.lowerChild}>
                 <div className={classes.margin}>
                     <Grid container justify="center">
-                        <Avatar className={classes.large} />
+                        <Avatar className={classes.large} style={{backgroundColor: randomColor()}}>{name}</Avatar>
                     </Grid>
                     <Grid container spacing={2} style={{ marginTop: '50px' }}>
                         <Grid item md={2} sm={2} xs={2}>
@@ -89,7 +100,7 @@ export default function Profile() {
                                 defaultValue={profile.employeeId}
                                 size='small'
                                 fullWidth
-                                
+
                             />
                         </Grid>
                         <Grid item md={true} sm={true} xs={true}>
