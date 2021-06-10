@@ -1,25 +1,12 @@
-import 'date-fns';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Grid,
     TextField,
-    Typography,
-    Divider,
-    Button,
+    Avatar,
 } from '@material-ui/core';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { DialogActions, DialogContent } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
-import Axios from 'axios';
 import Heading from './Heading';
-import {
-    withStyles,
-    FormControlLabel,
-    Checkbox,
-    Avatar
-} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     parentDiv: {
@@ -53,54 +40,50 @@ const useStyles = makeStyles((theme) => ({
         color: '#003049',
     },
     large: {
-        width: theme.spacing(11),
-        height: theme.spacing(11),
+        width: theme.spacing(15),
+        height: theme.spacing(15),
     },
 }));
 
 export default function Profile(props) {
     const classes = useStyles();
 
-    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
-    const [selectedEndDate, setSelectedEndDate] = useState(new Date());
-    const [description, setDescription] = useState("");
+    const [profile, setProfile] = useState({
+        employeeId: '',
+        name: '',
+        address: '',
+        contactNumber: '',
+        age: '',
+        dateOfBirth: '',
+        gender: '',
+        email: '',
+        designation: ''
+    });
 
-    const handleStartDateChange = (startDate) => {
-        setSelectedStartDate(startDate);
-    };
+    useEffect(() => {
+        getProfile();
+        console.log(profile );
+    }, []);
 
-    const handleEndDateChange = (endDate) => {
-        setSelectedEndDate(endDate);
-    };
-
-    const handleDescriptionChange = (e) => {
-        setDescription(e.target.value);
-    };
-
-    const handleSubmit = () => {
-        addLeave();
-    }
-
-    const handleClose = () => {
-        props.dialogClose(false);
-    }
-
-    const addLeave = () => {
-        const data = {
-            startDate: selectedStartDate,
-            endDate: selectedEndDate,
-            description: description,
-        }
-        console.log(data);
-
-        Axios.post(`http://localhost:5000/employee/addLeaveRequest`, data, {
+    const getProfile = () => {
+        Axios.get(`http://localhost:5000/employee/viewProfile`, {
             headers: {
                 'x-access-token': localStorage.getItem('x-access-token')
             }
         })
             .then((res) => {
-                console.log(res);
-                props.dialogClose(false);
+                console.log(res.data);
+                setProfile({
+                    employeeId: res.data.employeeId,
+                    name: res.data.name,
+                    address: res.data.address,
+                    contactNumber: res.data.contactNumber,
+                    age: res.data.age,
+                    dateOfBirth: res.data.dateOfBirth,
+                    gender: res.data.gender,
+                    email: res.data.email,
+                    designation: res.data.designation
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -117,14 +100,14 @@ export default function Profile(props) {
                     <Grid container justify="center">
                         <Avatar className={classes.large} />
                     </Grid>
-                    <Grid container spacing={2} style={{ marginTop: '30px' }}>
+                    <Grid container spacing={2} style={{ marginTop: '50px' }}>
                         <Grid item md={2} sm={2} xs={2}>
                             <TextField
                                 disabled
                                 id="outlined-disabled"
                                 label="Id"
-                                defaultValue="42798"
-                                size= 'small'
+                                value={profile.employeeId}
+                                size='small'
                                 fullWidth
                             />
                         </Grid>
@@ -133,8 +116,8 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Name"
-                                defaultValue="Hello World"
-                                size= 'small'
+                                value={profile.name}
+                                size='small'
                                 fullWidth
                             />
                         </Grid>
@@ -143,8 +126,8 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Date of Birth"
-                                defaultValue="Hello World"
-                                size= 'small'
+                                value={profile.dateOfBirth}
+                                size='small'
                                 fullWidth
                             />
                         </Grid>
@@ -155,8 +138,8 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Contact Number"
-                                defaultValue="42798"
-                                size= 'small'
+                                value={profile.contactNumber}
+                                size='small'
                                 fullWidth
                             />
                         </Grid>
@@ -165,8 +148,8 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Email"
-                                defaultValue="42798"
-                                size= 'small'
+                                value={profile.email}
+                                size='small'
                                 fullWidth
                             />
                         </Grid>
@@ -175,8 +158,8 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Gender"
-                                defaultValue="Female"
-                                size= 'small'
+                                value={profile.gender}
+                                size='small'
                                 fullWidth
                             />
                         </Grid>
@@ -187,7 +170,7 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Address"
-                                defaultValue="Hello World"
+                                value={profile.address}
                                 size='small'
                                 fullWidth
                             />
