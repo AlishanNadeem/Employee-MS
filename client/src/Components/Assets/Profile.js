@@ -45,24 +45,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Profile(props) {
+export default function Profile() {
     const classes = useStyles();
 
-    const [profile, setProfile] = useState({
-        employeeId: '',
-        name: '',
-        address: '',
-        contactNumber: '',
-        age: '',
-        dateOfBirth: '',
-        gender: '',
-        email: '',
-        designation: ''
-    });
+    const [profile, setProfile] = useState({});
 
     useEffect(() => {
         getProfile();
-        console.log(profile );
     }, []);
 
     const getProfile = () => {
@@ -73,17 +62,8 @@ export default function Profile(props) {
         })
             .then((res) => {
                 console.log(res.data);
-                setProfile({
-                    employeeId: res.data.employeeId,
-                    name: res.data.name,
-                    address: res.data.address,
-                    contactNumber: res.data.contactNumber,
-                    age: res.data.age,
-                    dateOfBirth: res.data.dateOfBirth,
-                    gender: res.data.gender,
-                    email: res.data.email,
-                    designation: res.data.designation
-                });
+                const getProfile = res.data;
+                setProfile(getProfile);
             })
             .catch((error) => {
                 console.log(error);
@@ -106,9 +86,10 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Id"
-                                value={profile.employeeId}
+                                defaultValue={profile.employeeId}
                                 size='small'
                                 fullWidth
+                                
                             />
                         </Grid>
                         <Grid item md={true} sm={true} xs={true}>
@@ -116,7 +97,8 @@ export default function Profile(props) {
                                 disabled
                                 id="outlined-disabled"
                                 label="Name"
-                                value={profile.name}
+                                defaultValue={profile.name}
+                                // value={profile.name}
                                 size='small'
                                 fullWidth
                             />

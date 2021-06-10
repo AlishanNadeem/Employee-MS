@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './Employee.css';
 // import Drawer from '../../Assets/Drawer/Drawer';
-// import NavBar from '../../Assets/NavBar/NavBar';
+import NavBar from '../../Assets/NavBar/NavBar';
 import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
 import PendingProject from '../../Assets/Tables/Employee/PendingProject';
 import Leaves from '../../Assets/Tables/Employee/Leaves';
 import LeaveForm from '../../Assets/Tables/Employee/LeaveForm';
 import Profile from '../../Assets/Profile';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 class Employee extends Component {
     render() {
@@ -17,14 +18,22 @@ class Employee extends Component {
                 </div>
                 <div className="Div Right">
                     <div className="Nav-Div">
-                        {/* <NavBar /> */}
+                        <NavBar />
                     </div>
                     <div className="Component-Div">
                         <div className="Content-Div">
+                            <Switch>
+                                <Route exact path='/employee/leaves'>
+                                    <Leaves />
+                                </Route>
+                            </Switch>
+
+                            {/* <Route path='/employee' Component={Profile} /> */}
+
                             {/* <ProjectTable /> */}
                             {/* <PendingProject /> */}
                             {/* <Leaves /> */}
-                            <Profile/>
+                            {/* <Profile /> */}
                         </div>
                     </div>
                 </div>
