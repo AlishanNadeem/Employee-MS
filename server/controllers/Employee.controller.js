@@ -125,7 +125,7 @@ exports.employeeLogin = ((req, res, next) => {
             expiresIn: 7200 // expires in 2 hours
         });
 
-        res.status(200).send({ auth: true, token: token });
+        res.status(200).send({ auth: true, token: token, designation: employee.designation });
 
     });
 });

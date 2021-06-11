@@ -11,7 +11,7 @@
 }
 
 .Left{
-    flex: 0.2;
+    flex: 0.15;
     background-color: #003049;
 }
 /* Shades
@@ -20,7 +20,7 @@
 */
 
 .Right{
-    flex: 0.8;
+    flex: 0.85;
 }
 
 .LeftBody-Div{

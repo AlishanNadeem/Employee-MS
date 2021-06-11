@@ -20,14 +20,16 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     backgroundColor: '#003049',
-    color: 'white'
+    color: 'white',
+    height: '100%',
+    justifyContent: 'center'
   }
 }));
 
-export default function ButtonAppBar() {
-  
+export default function NavBar(props) {
+
   const classes = useStyles();
-  const {url} = useRouteMatch();
+  const { url } = useRouteMatch();
   console.log(url);
 
   return (
@@ -35,33 +37,13 @@ export default function ButtonAppBar() {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Employee Dashboard
+            {props.message} Dashboard
           </Typography>
-          <Button color="inherit">
-            <Link to={`${url}/leaves`}>
-              leaves
-            </Link>
-          </Button>
-          <Button color="inherit">
-            <Link to={`${url}/projects`}>
-              projects
-            </Link>
-          </Button>
-          <Button color="inherit">
-            <Link to={`${url}/pendingProjects`}>
-              pending projects
-            </Link>
-          </Button>
-          <Button color="inherit">
-            <Link to={`${url}/profile`}>
-              Profile
-            </Link>
-          </Button>
           <Button color="secondary">
-            <Link to={`${url}/profile`}>
+            <Link to={`${url}/`} style={{ color: 'white', textDecoration: 'none' }}>
               Logout
             </Link>
-          </Button>          
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

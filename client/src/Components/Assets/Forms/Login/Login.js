@@ -45,6 +45,7 @@ class Login extends React.Component {
             employeeId: '',
             password: '',
             isLogged: false,
+            designation: '',
         }
     }
 
@@ -72,7 +73,8 @@ class Login extends React.Component {
                 console.log(res)
                 localStorage.setItem('x-access-token', res.data.token);
                 this.setState({
-                    isLogged: true
+                    isLogged: true,
+                    designation: res.data.designation
                 });
             }).catch((error) => {
                 console.log(error)
@@ -86,7 +88,11 @@ class Login extends React.Component {
         const { classes } = this.props;
 
         if (this.state.isLogged === true) {
-            return <Redirect to="/employee" />
+            if (this.state.designation === 'Admin') {
+                return <Redirect to='/admin' />
+            } else {
+                return <Redirect to='/employee' />
+            }
         }
 
         return (

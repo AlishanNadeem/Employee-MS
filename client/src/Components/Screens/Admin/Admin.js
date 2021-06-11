@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Employee.css';
+import '../Employee/Employee.css';
 import Drawer from '../../Assets/Drawer/Drawer';
 import NavBar from '../../Assets/NavBar/NavBar';
 import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
@@ -17,7 +17,7 @@ class Employee extends Component {
                 </div>
                 <div className="Div Right">
                     <div className="Nav-Div">
-                        <NavBar message="Employee"/>
+                        <NavBar message="Admin" />
                     </div>
                     <div className="Component-Div">
                         <div className="Content-Div">
