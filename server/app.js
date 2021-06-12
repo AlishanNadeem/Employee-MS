@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const Admin = require('./routes/Admin.route');
 const Employee = require('./routes/Employee.route');
+const Login = require('./routes/Login.route');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
 
+app.use('/', Login);
 app.use('/admin', Admin);
 app.use('/employee', Employee);
 

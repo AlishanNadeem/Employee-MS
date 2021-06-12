@@ -37,7 +37,7 @@ export default function NavBar(props) {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            {props.message} Dashboard
+            <b>{props.message}</b> Dashboard
           </Typography>
           <Button color="secondary">
             <Link to={`${url}/`} style={{ color: 'white', textDecoration: 'none' }}>

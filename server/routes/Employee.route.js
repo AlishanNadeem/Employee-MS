@@ -22,8 +22,4 @@ router.get('/viewProjects', loginValidation, employee_controller.viewProjects);
 
 router.post('/submitProject/:id',loginValidation, employee_controller.submitProject);
 
-router.post('/login', employee_controller.employeeLogin);
-
-router.post('/logout', employee_controller.employeeLogout);
-
 module.exports = router;

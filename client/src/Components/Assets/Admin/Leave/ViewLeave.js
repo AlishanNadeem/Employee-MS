@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Leaves() {
     const classes = useStyles();
 
-    const [leaves, setLeaves] = useState([]);
+    const [employees, setEmployees] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -96,8 +96,8 @@ export default function Leaves() {
         })
             .then((res) => {
                 console.log(res.data);
-                const getPendingLeaves = res.data;
-                setLeaves(getPendingLeaves);
+                const getEmployees = res.data;
+                setEmployees(getEmployees);
                 setIsLoaded(true);
             })
             .catch((error) => {
@@ -152,10 +152,10 @@ export default function Leaves() {
                                         <StyledTableCell align="center">Action</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
-                                {leaves.length > 0 ?
+                                {employees.length > 0 ?
                                     (<TableBody>
                                         {
-                                            leaves.map((employee) => (
+                                            employees.map((employee) => (
                                                 employee.leaves.map((leave) => (
                                                     <StyledTableRow key={employee._id}>
                                                         <StyledTableCell>{employee.name}</StyledTableCell>

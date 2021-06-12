@@ -68,7 +68,7 @@ class Login extends React.Component {
 
         console.log(userObject);
 
-        Axios.post('http://localhost:5000/employee/login', userObject)
+        Axios.post('http://localhost:5000/login', userObject)
             .then((res) => {
                 console.log(res)
                 localStorage.setItem('x-access-token', res.data.token);
