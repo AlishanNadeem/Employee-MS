@@ -19,6 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { Alert } from '@material-ui/lab';
 import Loader from '../../Loader';
 import Heading from '../../Heading';
@@ -34,7 +35,6 @@ const StyledTableCell = withStyles((theme) => ({
     body: {
         fontSize: 14,
         backgroundColor: theme.palette.common.white,
-        maxWidth: '80px',
     },
     button: {
         margin: theme.spacing(1),
@@ -147,13 +147,13 @@ export default function Leaves() {
 
     const acceptLeave = (id, status) => {
         Axios.post(`http://localhost:5000/admin/approveLeaveRequest/${id}`, {
-            status : status
+            status: status
         },
-        {
-            headers: {
-                'x-access-token': localStorage.getItem('x-access-token')
-            }
-        })
+            {
+                headers: {
+                    'x-access-token': localStorage.getItem('x-access-token')
+                }
+            })
             .then((res) => {
                 console.log(res.data);
                 getPendingLeaves();
@@ -168,8 +168,11 @@ export default function Leaves() {
     };
 
     const handleClickAccept = (e) => {
-        // setIsLoadedUpdate(true);
         acceptLeave(e, "Approved");
+    };
+
+    const handleClickDeclined = (e) => {
+        acceptLeave(e, "Declined");
     };
 
     const handleClose = (data) => {
@@ -180,27 +183,6 @@ export default function Leaves() {
 
     return (
         <div className={classes.parentDiv}>
-            <Backdrop className={classes.backdrop} open={isLoadedUpdate}>
-                <Loader />
-            </Backdrop>
-            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }}
-                open={isDeleted} autoHideDuration={3000} onClose={handleSnackbarClose}>
-                <Alert onClose={handleSnackbarClose} severity="error">
-                    Leave Deleted Successfully
-                </Alert>
-            </Snackbar>
-            {
-                onClickAdd === true ?
-                    <Dialog open={onClickAdd} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        {/* <AddLeave dialogClose = {handleClose}/> */}
-                    </Dialog> : null
-            }
-            {
-                onClickUpdate === true ?
-                    <Dialog open={onClickUpdate} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        {/* <UpdateLeave dialogClose = {handleClose} selectedLeave = {selectedLeave}/> */}
-                    </Dialog> : null
-            }
             <div className={classes.upperChild}>
                 <Heading text='Pending Leaves' />
             </div>
@@ -231,14 +213,26 @@ export default function Leaves() {
                                                         <StyledTableCell align="center">{leave.startDate}</StyledTableCell>
                                                         <StyledTableCell align="center">{leave.endDate}</StyledTableCell>
                                                         <StyledTableCell align="center">
-                                                            <Button
-                                                                variant="contained"
-                                                                size="small"
-                                                                className={classes.button}
-                                                                startIcon={<CheckCircleIcon />}
-                                                                onClick={() => handleClickAccept(leave._id)}>
+                                                            <React.Fragment>
+                                                                <Button
+                                                                    variant="contained"
+                                                                    color="primary"
+                                                                    size="small"
+                                                                    className={classes.button}
+                                                                    startIcon={<CheckCircleIcon />}
+                                                                    onClick={() => handleClickAccept(leave._id)}>
                                                                     Accept
-                                                            </Button>
+                                                                </Button>
+                                                                <Button
+                                                                    variant="contained"
+                                                                    color="secondary"
+                                                                    size="small"
+                                                                    className={classes.button}
+                                                                    startIcon={<CancelIcon />}
+                                                                    onClick={() => handleClickDeclined(leave._id)}>
+                                                                    Declined
+                                                                </Button>
+                                                            </React.Fragment>
                                                         </StyledTableCell>
                                                     </StyledTableRow>
                                                 ))

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table,
-    TableBody, 
-    TableCell, 
-    TableContainer, 
-    TableHead, 
-    TableRow, 
-    Button, 
-    Paper, 
-    Snackbar, 
-    Dialog, 
-    Backdrop, 
-    Grid } from '@material-ui/core';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Button,
+    Paper,
+    Snackbar,
+    Dialog,
+    Backdrop,
+    Grid
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -82,12 +84,12 @@ const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
-      },
+    },
 }));
 
 export default function Leaves() {
     const classes = useStyles();
-    
+
     const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -135,7 +137,7 @@ export default function Leaves() {
                 setIsDeleted(true);
                 console.log(res.data);
                 getLeaves();
-                
+
             })
             .catch((error) => {
                 console.log(error);
@@ -150,7 +152,7 @@ export default function Leaves() {
         })
             .then((res) => {
                 setSelectedLeave({
-                    id: res.data._id,   
+                    id: res.data._id,
                     startDate: res.data.startDate,
                     endDate: res.data.endDate,
                     description: res.data.description,
@@ -181,43 +183,43 @@ export default function Leaves() {
 
     return (
         <div className={classes.parentDiv}>
-             <Backdrop className={classes.backdrop} open={isLoadedUpdate}>
-                 <Loader />
-             </Backdrop>
-            <Snackbar  anchorOrigin={{vertical: 'bottom', horizontal: 'right',}} 
+            <Backdrop className={classes.backdrop} open={isLoadedUpdate}>
+                <Loader />
+            </Backdrop>
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right', }}
                 open={isDeleted} autoHideDuration={3000} onClose={handleSnackbarClose}>
                 <Alert onClose={handleSnackbarClose} severity="error">
                     Leave Deleted Successfully
                 </Alert>
             </Snackbar>
             {
-                onClickAdd === true ? 
-                <Dialog open={onClickAdd} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <AddLeave dialogClose = {handleClose}/>
-                </Dialog> : null
+                onClickAdd === true ?
+                    <Dialog open={onClickAdd} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <AddLeave dialogClose={handleClose} />
+                    </Dialog> : null
             }
             {
-                onClickUpdate === true ? 
-                <Dialog open={onClickUpdate} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <UpdateLeave dialogClose = {handleClose} selectedLeave = {selectedLeave}/>
-                </Dialog> : null
+                onClickUpdate === true ?
+                    <Dialog open={onClickUpdate} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <UpdateLeave dialogClose={handleClose} selectedLeave={selectedLeave} />
+                    </Dialog> : null
             }
             <div className={classes.upperChild}>
                 <Heading text='LEAVES' />
             </div>
             <div className={classes.lowerChild}>
                 <TableContainer component={Paper}>
-                <Grid container justify="flex-end">
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        size="medium"
-                        className={classes.button}
-                        startIcon={<AddCircleIcon />}
-                        onClick={handleClickAdd}>
-                            Add New                                                
-                    </Button>
-                </Grid> 
+                    <Grid container justify="flex-end">
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            size="medium"
+                            className={classes.button}
+                            startIcon={<AddCircleIcon />}
+                            onClick={handleClickAdd}>
+                            Add New
+                        </Button>
+                    </Grid>
                     {
                         isLoaded === false ? (<Loader />) : (
                             <Table aria-label="customized table">
@@ -264,9 +266,9 @@ export default function Leaves() {
                                                                         className={classes.button}
                                                                         startIcon={<CloudUploadIcon />}
                                                                         onClick={() => handleClickUpdate(leave._id)}>
-                                                                            Update
-                                                                        
-                                                                </Button>
+                                                                        Update
+
+                                                                    </Button>
                                                                     <Button
                                                                         variant="contained"
                                                                         color="secondary"
@@ -274,8 +276,8 @@ export default function Leaves() {
                                                                         className={classes.button}
                                                                         startIcon={<DeleteIcon />}
                                                                         onClick={() => deleteLeave(leave._id)}>
-                                                                            Delete
-                                                            </Button>
+                                                                        Delete
+                                                                    </Button>
                                                                 </React.Fragment>
                                                             )
                                                             :
@@ -286,15 +288,15 @@ export default function Leaves() {
                                                                         size="small"
                                                                         className={classes.button}
                                                                         startIcon={<CloudUploadIcon />}>
-                                                                            Update
-                                                                </Button>
+                                                                        Update
+                                                                    </Button>
                                                                     <Button
                                                                         disabled
                                                                         size="small"
                                                                         className={classes.button}
                                                                         startIcon={<DeleteIcon />}>
-                                                                            Delete
-                                                            </Button>
+                                                                        Delete
+                                                                    </Button>
                                                                 </React.Fragment>
                                                             )
                                                     }
