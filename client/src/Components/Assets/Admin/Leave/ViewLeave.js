@@ -15,16 +15,10 @@ import {
     Backdrop,
     Grid
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { Alert } from '@material-ui/lab';
 import Loader from '../../Loader';
 import Heading from '../../Heading';
-// import AddLeave from './AddLeave';
-// import UpdateLeave from './UpdateLeave';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -82,30 +76,13 @@ const useStyles = makeStyles((theme) => ({
         color: '#003049',
         fontWeight: 'bold',
     },
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
-        color: '#fff',
-    },
 }));
 
 export default function Leaves() {
     const classes = useStyles();
 
-    const [isDeleted, setIsDeleted] = React.useState(false);
     const [leaves, setLeaves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isLoadedUpdate, setIsLoadedUpdate] = useState(false);
-    const [onClickAdd, setOnClickAdd] = React.useState(false);
-    const [onClickUpdate, setOnClickUpdate] = React.useState(false);
-    const [selectedLeave, setSelectedLeave] = React.useState({});
-    const [description, setDescription] = React.useState({});
-
-    const handleSnackbarClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setIsDeleted(false);
-    };
 
     useEffect(() => {
         getPendingLeaves();
@@ -122,23 +99,6 @@ export default function Leaves() {
                 const getPendingLeaves = res.data;
                 setLeaves(getPendingLeaves);
                 setIsLoaded(true);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
-
-    const deleteLeave = (id) => {
-        Axios.post(`http://localhost:5000/employee/deleteLeaveRequest/${id}`, null, {
-            headers: {
-                'x-access-token': localStorage.getItem('x-access-token')
-            }
-        })
-            .then((res) => {
-                setIsDeleted(true);
-                console.log(res.data);
-                getPendingLeaves();
-
             })
             .catch((error) => {
                 console.log(error);
@@ -163,22 +123,12 @@ export default function Leaves() {
             })
     }
 
-    const handleClickAdd = () => {
-        setOnClickAdd(true);
-    };
-
     const handleClickAccept = (e) => {
         acceptLeave(e, "Approved");
     };
 
     const handleClickDeclined = (e) => {
         acceptLeave(e, "Declined");
-    };
-
-    const handleClose = (data) => {
-        setOnClickAdd(data);
-        setOnClickUpdate(data);
-        getPendingLeaves();
     };
 
     return (
