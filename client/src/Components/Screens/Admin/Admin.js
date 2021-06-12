@@ -7,6 +7,7 @@ import PendingProject from '../../Assets/Tables/Employee/PendingProject';
 import Leaves from '../../Assets/Tables/Employee/Leaves';
 import Profile from '../../Assets/Profile';
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
+import ViewLeaves from '../../Assets/Admin/Leave/ViewLeave';
 
 class Employee extends Component {
     render() {
@@ -21,7 +22,7 @@ class Employee extends Component {
                     </div>
                     <div className="Component-Div">
                         <div className="Content-Div">
-                            <Switch>
+                            {/* <Switch>
                                 <Route exact path='/employee/leaves'>
                                     <Leaves />
                                 </Route>
@@ -37,7 +38,8 @@ class Employee extends Component {
                                 <Route exact path='/employee/'>
                                     <Redirect to='/employee/dashboard'/>
                                 </Route>
-                            </Switch>
+                            </Switch> */}
+                            <ViewLeaves/>
                         </div>
                     </div>
                 </div>

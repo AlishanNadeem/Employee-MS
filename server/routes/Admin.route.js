@@ -17,7 +17,7 @@ router.get('/viewLeaveHistory', admin_controller.viewLeaveHistory);
 router.get('/viewLeaveRequests', admin_controller.viewLeaveRequests);
 
 //id should be employee.leave.id
-router.post('/approveLeave/:id', admin_controller.approveLeaveRequest);
+router.post('/approveLeaveRequest/:id', admin_controller.approveLeaveRequest);
 
 router.post('/addProject/:empOId', admin_controller.addProject);
 
