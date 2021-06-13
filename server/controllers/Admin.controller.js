@@ -19,6 +19,16 @@ exports.viewActiveEmployee = ((req, res, next) => {
     });
 });
 
+exports.viewEmployee = ((req, res, next) => {
+
+    Employee.findById(req.params.id, ((err, employee) => {
+        if(err) return next(err);
+
+        res.send(employee);
+    }))
+
+});
+
 exports.viewNonActiveEmployee = ((req, res, next) => {
 
     Employee.aggregate([

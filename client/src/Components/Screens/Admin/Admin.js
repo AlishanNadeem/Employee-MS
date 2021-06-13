@@ -10,6 +10,9 @@ import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import ViewLeaves from '../../Assets/Admin/Leave/ViewLeave';
 import LeaveHistory from '../../Assets/Admin/Leave/LeaveHistory';
 import ProjectHistory from '../../Assets/Admin/Project/ProjectHistory';
+import ViewPendingProjects from '../../Assets/Admin/Project/ViewPendingProjects';
+import AddProject from '../../Assets/Admin/Project/AddProject';
+import NonActiveEmployee from '../../Assets/Admin/Employee/NonActiveEmployee';
 
 class Employee extends Component {
     render() {
@@ -42,8 +45,11 @@ class Employee extends Component {
                                 </Route>
                             </Switch> */}
                             {/* <LeaveHistory/> */}
-                            <ProjectHistory/>
+                            {/* <ViewPendingProjects/> */}
+                            {/* <ProjectHistory/> */}
                             {/* <ViewLeaves/> */}
+                            {/* <AddProject/> */}
+                            <NonActiveEmployee/>
                         </div>
                     </div>
                 </div>

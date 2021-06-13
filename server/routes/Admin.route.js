@@ -4,6 +4,8 @@ const admin_controller = require('../controllers/Admin.controller');
 
 router.get('/employees', admin_controller.viewActiveEmployee);
 
+router.get('/employees/:id', admin_controller.viewEmployee); //done in frontend admin
+
 router.get('/nonActiveEmployees', admin_controller.viewNonActiveEmployee);
 
 router.post('/addEmployee', admin_controller.addEmployee);
@@ -19,10 +21,10 @@ router.get('/viewLeaveRequests', admin_controller.viewLeaveRequests); //done in 
 //id should be employee.leave.id
 router.post('/approveLeaveRequest/:id', admin_controller.approveLeaveRequest); //done in frontend admin
 
-router.post('/addProject/:empOId', admin_controller.addProject);
+router.post('/addProject/:empOId', admin_controller.addProject); //done in frontend admin
 
-router.get('/viewProjects', admin_controller.viewProjects);
+router.get('/viewProjects', admin_controller.viewProjects); //done in frontend admin
 
-router.get('/viewProjectHistory', admin_controller.viewProjectHistory);
+router.get('/viewProjectHistory', admin_controller.viewProjectHistory); //done in frontend admin
 
 module.exports = router;

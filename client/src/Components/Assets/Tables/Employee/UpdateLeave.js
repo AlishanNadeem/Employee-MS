@@ -36,11 +36,11 @@ export default function AddLeave(props) {
     const [selectedEndDate, setSelectedEndDate] = useState(new Date());
     const [description, setDescription] = useState("");
 
-    useEffect(() => {
-        setSelectedStartDate(props.selectedLeave.startDate);
-        setSelectedEndDate(props.selectedLeave.endDate);
-        setDescription(props.selectedLeave.description);
-    }, []);
+        useEffect(() => {
+            setSelectedStartDate(props.selectedLeave.startDate);
+            setSelectedEndDate(props.selectedLeave.endDate);
+            setDescription(props.selectedLeave.description);
+        }, []);
 
     const updateLeave = () => {
 
