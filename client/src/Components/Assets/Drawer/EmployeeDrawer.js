@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ClippedDrawer() {
+export default function EmployeeDrawer() {
     const classes = useStyles();
 
     const { url } = useRouteMatch();

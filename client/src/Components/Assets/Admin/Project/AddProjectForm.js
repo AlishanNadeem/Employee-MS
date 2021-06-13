@@ -89,7 +89,6 @@ export default function AddProjectForm(props) {
                                 InputProps={{
                                     readOnly: true,
                                 }}
-                                variant="outlined"
                             />
                         </Grid>
                     </Grid>

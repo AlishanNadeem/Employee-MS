@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../Employee/Employee.css';
-import Drawer from '../../Assets/Drawer/Drawer';
+import AdminDrawer from '../../Assets/Drawer/AdminDrawer';
 import NavBar from '../../Assets/NavBar/NavBar';
 import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
 import PendingProject from '../../Assets/Tables/Employee/PendingProject';
@@ -13,13 +13,14 @@ import ProjectHistory from '../../Assets/Admin/Project/ProjectHistory';
 import ViewPendingProjects from '../../Assets/Admin/Project/ViewPendingProjects';
 import AddProject from '../../Assets/Admin/Project/AddProject';
 import NonActiveEmployee from '../../Assets/Admin/Employee/NonActiveEmployee';
+import ActiveEmployee from '../../Assets/Admin/Employee/ActiveEmployee';
 
 class Employee extends Component {
     render() {
         return (
             <div className="Main-Div" >
                 <div className="Div Left">
-                    <Drawer />
+                    <AdminDrawer />
                 </div>
                 <div className="Div Right">
                     <div className="Nav-Div">
@@ -27,29 +28,35 @@ class Employee extends Component {
                     </div>
                     <div className="Component-Div">
                         <div className="Content-Div">
-                            {/* <Switch>
-                                <Route exact path='/employee/leaves'>
-                                    <Leaves />
+                            <Switch>
+                                <Route exact path='/admin/leaveHistory'>
+                                    <LeaveHistory />
                                 </Route>
-                                <Route exact path='/employee/projects'>
-                                    <ProjectTable />
+                                <Route exact path='/admin/employeesDetail'>
+                                    <ActiveEmployee />
                                 </Route>
-                                <Route exact path='/employee/pendingProjects'>
-                                    <PendingProject />
+                                <Route exact path='/admin/leaveRequest'>
+                                    <ViewLeaves />
                                 </Route>
-                                <Route exact path='/employee/dashboard'>
+                                <Route exact path='/admin/nonActiveEmployees'>
+                                    <NonActiveEmployee />
+                                </Route>
+                                <Route exact path='/admin/addProject'>
+                                     <AddProject/>
+                                </Route>
+                                <Route exact path='/admin/projectHistory'>
+                                      <ProjectHistory/>
+                                </Route>
+                                <Route exact path='/admin/viewPendingProject'>
+                                    <ViewPendingProjects/>
+                                </Route>
+                                <Route exact path='/admin/dashboard'>
                                     <Profile />
                                 </Route>
-                                <Route exact path='/employee/'>
-                                    <Redirect to='/employee/dashboard'/>
+                                <Route exact path='/admin/'>
+                                    <Redirect to='/admin/dashboard' />
                                 </Route>
-                            </Switch> */}
-                            {/* <LeaveHistory/> */}
-                            {/* <ViewPendingProjects/> */}
-                            {/* <ProjectHistory/> */}
-                            {/* <ViewLeaves/> */}
-                            {/* <AddProject/> */}
-                            <NonActiveEmployee/>
+                            </Switch>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Employee.css';
-import Drawer from '../../Assets/Drawer/Drawer';
+import Drawer from '../../Assets/Drawer/EmployeeDrawer';
 import NavBar from '../../Assets/NavBar/NavBar';
 import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
 import PendingProject from '../../Assets/Tables/Employee/PendingProject';

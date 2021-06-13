@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AddLeave(props) {
+export default function UpdateLeave(props) {
     const classes = useStyles();
 
     const [selectedStartDate, setSelectedStartDate] = useState(new Date());

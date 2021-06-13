@@ -8,7 +8,7 @@ let employeeSchema = new Schema({
     address: { type: String },
     contactNumber: { type: Number },
     age: { type: Number },
-    dateOfBirth: { type: String },
+    dateOfBirth: { type: Date },
     gender: { type: String },
     email: { type: String },
     designation: { type: String },

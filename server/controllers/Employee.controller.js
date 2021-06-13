@@ -76,7 +76,8 @@ exports.deleteLeaveRequest = ((req, res, next) => {
 
 exports.viewProjectHistory = ((req, res, next) => {
     Project.find({
-        'empOId': mongoose.Types.ObjectId(req.decoded.id)
+        'empOId': mongoose.Types.ObjectId(req.decoded.id),
+        'status': 'Completed'
     }, (err, data) => {
         if (err) return next(err);
 

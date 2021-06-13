@@ -32,8 +32,7 @@ const StyledTableCell = withStyles((theme) => ({
     },
     body: {
         fontSize: 14,
-        backgroundColor: theme.palette.common.white,
-        maxWidth: '80px',
+        backgroundColor: theme.palette.common.white
     },
     button: {
         margin: theme.spacing(1),
