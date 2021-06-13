@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'green',
         fontWeight: 'bold',
     },
-    statusColorYellow: {
+    statusColorBlue: {
         color: '#003049',
         fontWeight: 'bold',
     },
@@ -243,7 +243,7 @@ export default function Leaves() {
                                                 <StyledTableCell align="center">{leave.endDate}</StyledTableCell>
                                                 {
                                                     leave.status === 'Pending' ?
-                                                        (<StyledTableCell align="center" className={classes.statusColorYellow}>{leave.status}</StyledTableCell>)
+                                                        (<StyledTableCell align="center" className={classes.statusColorBlue}>{leave.status}</StyledTableCell>)
                                                         :
                                                         [
                                                             leave.status === 'Approved' ?

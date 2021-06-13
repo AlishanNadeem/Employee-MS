@@ -100,6 +100,19 @@ exports.viewLeaveHistory = ((req, res, next) => {
                 foreignField: 'empOId',
                 as: 'leaves'
             }
+        },
+        {
+            $addFields: {
+                leaves:
+                {
+                    $filter:
+                    {
+                        input: "$leaves",
+                        as: "leave",
+                        cond: { $ne: ["$$leave.status", "Pending"] }
+                    }
+                }
+            }
         }
     ],
         (err, data) => {
@@ -228,6 +241,19 @@ exports.viewProjectHistory = ((req, res, next) => {
                 localField: '_id',
                 foreignField: 'empOId',
                 as: 'projects'
+            }
+        },
+        {
+            $addFields: {
+                projects:
+                {
+                    $filter:
+                    {
+                        input: "$projects",
+                        as: "project",
+                        cond: { $ne: ["$$project.status", "Pending"] }
+                    }
+                }
             }
         }
     ],

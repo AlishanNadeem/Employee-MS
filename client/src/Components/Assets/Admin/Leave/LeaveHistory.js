@@ -71,25 +71,21 @@ const useStyles = makeStyles((theme) => ({
     statusColorGreen: {
         color: 'green',
         fontWeight: 'bold',
-    },
-    statusColorYellow: {
-        color: '#003049',
-        fontWeight: 'bold',
-    },
+    }
 }));
 
-export default function Leaves() {
+export default function LeaveHistory() {
     const classes = useStyles();
 
     const [employees, setEmployees] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        getPendingLeaves();
+        getLeaveHistory();
     }, []);
 
-    const getPendingLeaves = () => {
-        Axios.get('http://localhost:5000/admin/viewLeaveRequests', {
+    const getLeaveHistory = () => {
+        Axios.get('http://localhost:5000/admin/viewLeaveHistory', {
             headers: {
                 'x-access-token': localStorage.getItem('x-access-token')
             }
@@ -105,36 +101,10 @@ export default function Leaves() {
             })
     }
 
-    const acceptLeave = (id, status) => {
-        Axios.post(`http://localhost:5000/admin/approveLeaveRequest/${id}`, {
-            status: status
-        },
-            {
-                headers: {
-                    'x-access-token': localStorage.getItem('x-access-token')
-                }
-            })
-            .then((res) => {
-                console.log(res.data);
-                getPendingLeaves();
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
-
-    const handleClickAccept = (e) => {
-        acceptLeave(e, "Approved");
-    };
-
-    const handleClickDeclined = (e) => {
-        acceptLeave(e, "Declined");
-    };
-
     return (
         <div className={classes.parentDiv}>
             <div className={classes.upperChild}>
-                <Heading text='Pending Leaves' />
+                <Heading text='Leave History' />
             </div>
             <div className={classes.lowerChild}>
                 <TableContainer component={Paper}>
@@ -145,12 +115,12 @@ export default function Leaves() {
                             <Table aria-label="customized table">
                                 <TableHead>
                                     <TableRow>
-                                        <StyledTableCell>Employee Id</StyledTableCell>
+                                        <StyledTableCell>Employee ID</StyledTableCell>
                                         <StyledTableCell>Employee Name</StyledTableCell>
                                         <StyledTableCell>Description</StyledTableCell>
                                         <StyledTableCell align="center">Start Date</StyledTableCell>
                                         <StyledTableCell align="center">End Date</StyledTableCell>
-                                        <StyledTableCell align="center">Action</StyledTableCell>
+                                        <StyledTableCell align="center">Status</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 {employees.length > 0 ?
@@ -164,28 +134,12 @@ export default function Leaves() {
                                                         <StyledTableCell component="th" scope="row">{leave.description}</StyledTableCell>
                                                         <StyledTableCell align="center">{leave.startDate}</StyledTableCell>
                                                         <StyledTableCell align="center">{leave.endDate}</StyledTableCell>
-                                                        <StyledTableCell align="center">
-                                                            <React.Fragment>
-                                                                <Button
-                                                                    variant="contained"
-                                                                    color="primary"
-                                                                    size="small"
-                                                                    className={classes.button}
-                                                                    startIcon={<CheckCircleIcon />}
-                                                                    onClick={() => handleClickAccept(leave._id)}>
-                                                                    Accept
-                                                                </Button>
-                                                                <Button
-                                                                    variant="contained"
-                                                                    color="secondary"
-                                                                    size="small"
-                                                                    className={classes.button}
-                                                                    startIcon={<CancelIcon />}
-                                                                    onClick={() => handleClickDeclined(leave._id)}>
-                                                                    Declined
-                                                                </Button>
-                                                            </React.Fragment>
-                                                        </StyledTableCell>
+                                                        {
+                                                            leave.status === 'Approved' ?
+                                                                (<StyledTableCell align="center" className={classes.statusColorGreen}>{leave.status}</StyledTableCell>)
+                                                                :
+                                                                (<StyledTableCell align="center" className={classes.statusColorRed}>{leave.status}</StyledTableCell>)
+                                                        }
                                                     </StyledTableRow>
                                                 ))
                                             ))

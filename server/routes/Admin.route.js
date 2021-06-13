@@ -12,12 +12,12 @@ router.post('/updateEmployee/:id', admin_controller.updateEmployee);
 
 router.post('/deleteEmployee/:id', admin_controller.deleteEmployee);
 
-router.get('/viewLeaveHistory', admin_controller.viewLeaveHistory);
+router.get('/viewLeaveHistory', admin_controller.viewLeaveHistory); //done in frontend admin
 
-router.get('/viewLeaveRequests', admin_controller.viewLeaveRequests);
+router.get('/viewLeaveRequests', admin_controller.viewLeaveRequests); //done in frontend admin    
 
 //id should be employee.leave.id
-router.post('/approveLeaveRequest/:id', admin_controller.approveLeaveRequest);
+router.post('/approveLeaveRequest/:id', admin_controller.approveLeaveRequest); //done in frontend admin
 
 router.post('/addProject/:empOId', admin_controller.addProject);
 

@@ -8,6 +8,8 @@ import Leaves from '../../Assets/Tables/Employee/Leaves';
 import Profile from '../../Assets/Profile';
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import ViewLeaves from '../../Assets/Admin/Leave/ViewLeave';
+import LeaveHistory from '../../Assets/Admin/Leave/LeaveHistory';
+import ProjectHistory from '../../Assets/Admin/Project/ProjectHistory';
 
 class Employee extends Component {
     render() {
@@ -39,7 +41,9 @@ class Employee extends Component {
                                     <Redirect to='/employee/dashboard'/>
                                 </Route>
                             </Switch> */}
-                            <ViewLeaves/>
+                            {/* <LeaveHistory/> */}
+                            <ProjectHistory/>
+                            {/* <ViewLeaves/> */}
                         </div>
                     </div>
                 </div>
