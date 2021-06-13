@@ -4,6 +4,16 @@ const Project = require('../models/Project.model');
 const bcrypt = require('bcryptjs');
 const generateUniqueId = require('generate-unique-id');
 
+exports.viewProfile = ((req, res, next) => {
+
+    Employee.findById({ _id: req.decoded.id },
+        (err, data) => {
+            if (err) return next(err);
+
+            res.send(data);
+        });
+});
+
 exports.viewActiveEmployee = ((req, res, next) => {
 
     Employee.aggregate([

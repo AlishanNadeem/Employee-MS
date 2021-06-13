@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../Employee/Employee.css';
+import { 
+    Switch, 
+    Route, 
+    Redirect 
+} from 'react-router-dom';
 import AdminDrawer from '../../Assets/Drawer/AdminDrawer';
 import NavBar from '../../Assets/NavBar/NavBar';
-import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
-import PendingProject from '../../Assets/Tables/Employee/PendingProject';
-import Leaves from '../../Assets/Tables/Employee/Leaves';
-import Profile from '../../Assets/Profile';
-import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
+import AdminProfile from '../../Assets/Admin/Profile/Profile';
 import ViewLeaves from '../../Assets/Admin/Leave/ViewLeave';
 import LeaveHistory from '../../Assets/Admin/Leave/LeaveHistory';
 import ProjectHistory from '../../Assets/Admin/Project/ProjectHistory';
@@ -51,7 +52,7 @@ class Employee extends Component {
                                     <ViewPendingProjects/>
                                 </Route>
                                 <Route exact path='/admin/dashboard'>
-                                    <Profile />
+                                    <AdminProfile />
                                 </Route>
                                 <Route exact path='/admin/'>
                                     <Redirect to='/admin/dashboard' />

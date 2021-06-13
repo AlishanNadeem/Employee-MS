@@ -49,6 +49,14 @@ class Login extends React.Component {
         }
     }
 
+    componentDidMount(){
+        localStorage.clear();
+        this.setState({ 
+            employeeId: '', 
+            password: '' 
+        });
+    }
+
     onChangeEmployeeId(e) {
         this.setState({ employeeId: e.target.value })
         console.log(this.state.employeeId);
@@ -76,12 +84,13 @@ class Login extends React.Component {
                     isLogged: true,
                     designation: res.data.designation
                 });
+                if(res.status === '404'){
+                    alert("Wrong Credentials")
+                }
             }).catch((error) => {
                 console.log(error)
             });
 
-
-        this.setState({ employeeId: '', password: '' })
     }
 
     render() {

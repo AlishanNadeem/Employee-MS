@@ -6,8 +6,8 @@ import {
     TextField,
     Avatar,
 } from '@material-ui/core';
-import Heading from './Heading';
-import Loader from './Loader';
+import Heading from '../../Heading';
+import Loader from '../../Loader';
 
 const useStyles = makeStyles((theme) => ({
     parentDiv: {
@@ -69,7 +69,7 @@ export default function Profile() {
     }
 
     const getProfile = () => {
-        Axios.get(`http://localhost:5000/employee/viewProfile`, {
+        Axios.get(`http://localhost:5000/admin/viewProfile`, {
             headers: {
                 'x-access-token': localStorage.getItem('x-access-token')
             }
@@ -117,7 +117,6 @@ export default function Profile() {
                                             id="outlined-disabled"
                                             label="Name"
                                             defaultValue={profile.name}
-                                            // value={profile.name}
                                             size='small'
                                             fullWidth
                                         />

@@ -1,30 +1,34 @@
 const express = require('express');
 const router = express.Router();
+
 const admin_controller = require('../controllers/Admin.controller');
+const { loginValidation } = require("../middleware/loginValidate");
 
-router.get('/employees', admin_controller.viewActiveEmployee);
+router.get('/viewProfile', loginValidation, admin_controller.viewProfile);
 
-router.get('/employees/:id', admin_controller.viewEmployee); //done in frontend admin
+router.get('/employees', loginValidation, admin_controller.viewActiveEmployee);
 
-router.get('/nonActiveEmployees', admin_controller.viewNonActiveEmployee);
+router.get('/employees/:id', loginValidation, admin_controller.viewEmployee); //done in frontend admin
 
-router.post('/addEmployee', admin_controller.addEmployee);
+router.get('/nonActiveEmployees', loginValidation, admin_controller.viewNonActiveEmployee);
 
-router.post('/updateEmployee/:id', admin_controller.updateEmployee);
+router.post('/addEmployee', loginValidation, admin_controller.addEmployee);
 
-router.post('/deleteEmployee/:id', admin_controller.deleteEmployee);
+router.post('/updateEmployee/:id', loginValidation, admin_controller.updateEmployee);
 
-router.get('/viewLeaveHistory', admin_controller.viewLeaveHistory); //done in frontend admin
+router.post('/deleteEmployee/:id', loginValidation, admin_controller.deleteEmployee);
 
-router.get('/viewLeaveRequests', admin_controller.viewLeaveRequests); //done in frontend admin    
+router.get('/viewLeaveHistory', loginValidation, admin_controller.viewLeaveHistory); //done in frontend admin
+
+router.get('/viewLeaveRequests', loginValidation, admin_controller.viewLeaveRequests); //done in frontend admin    
 
 //id should be employee.leave.id
-router.post('/approveLeaveRequest/:id', admin_controller.approveLeaveRequest); //done in frontend admin
+router.post('/approveLeaveRequest/:id', loginValidation, admin_controller.approveLeaveRequest); //done in frontend admin
 
-router.post('/addProject/:empOId', admin_controller.addProject); //done in frontend admin
+router.post('/addProject/:empOId', loginValidation, admin_controller.addProject); //done in frontend admin
 
-router.get('/viewProjects', admin_controller.viewProjects); //done in frontend admin
+router.get('/viewProjects', loginValidation, admin_controller.viewProjects); //done in frontend admin
 
-router.get('/viewProjectHistory', admin_controller.viewProjectHistory); //done in frontend admin
+router.get('/viewProjectHistory', loginValidation, admin_controller.viewProjectHistory); //done in frontend admin
 
 module.exports = router;

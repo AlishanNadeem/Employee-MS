@@ -1,21 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-import { Route, Link, useRouteMatch, NavLink } from 'react-router-dom';
-
-const drawerWidth = '100%';
+import { useRouteMatch, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: theme.zIndex.drawer + 1,
     },
     drawer: {
-        width: drawerWidth,
+        width: '100%',
         flexShrink: 0,
     },
     drawerPaper: {
@@ -41,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
+    toolbar: {
+        justifyContent: 'center',
+    }
 }));
 
 export default function EmployeeDrawer() {
@@ -58,8 +57,8 @@ export default function EmployeeDrawer() {
                 classes={{
                     paper: classes.drawerPaper,
                 }}>
-                <Toolbar>
-                    <Typography variant="h3">
+                <Toolbar className={classes.toolbar}>
+                    <Typography variant="h3" style={{marginTop: '40px'}}>
                         EMS
                     </Typography>
                 </Toolbar>
@@ -70,7 +69,8 @@ export default function EmployeeDrawer() {
                             <ListItemText>
                                 <NavLink to={`${url}/dashboard`} style={{ color: 'white', textDecoration: 'none' }} activeStyle={{
                                     fontWeight: "bold",
-                                    color: "red"
+                                    color: "red",
+                                    backgroundColor: "black",
                                 }}>
                                     <Typography variant="h6">
                                         Dashboard

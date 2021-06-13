@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import './Employee.css';
 import Drawer from '../../Assets/Drawer/EmployeeDrawer';
 import NavBar from '../../Assets/NavBar/NavBar';
-import ProjectTable from '../../Assets/Tables/Employee/ProjectTable';
-import PendingProject from '../../Assets/Tables/Employee/PendingProject';
-import Leaves from '../../Assets/Tables/Employee/Leaves';
-import Profile from '../../Assets/Profile';
-import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
+import ProjectTable from '../../Assets/Employee/Project/ProjectTable';
+import PendingProject from '../../Assets/Employee/Project/PendingProject';
+import Leaves from '../../Assets/Employee/Leave/Leaves';
+import Profile from '../../Assets/Employee/Profile/Profile';
+import { 
+    Switch, 
+    Route, 
+    Redirect 
+} from 'react-router-dom';
 
 class Employee extends Component {
     render() {
