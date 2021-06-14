@@ -20,7 +20,3 @@ exports.employeeLogin = ((req, res, next) => {
 
     });
 });
-
-exports.employeeLogout = ((req, res, next) => {
-    //add logout code here
-});
