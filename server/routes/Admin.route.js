@@ -12,7 +12,7 @@ router.get('/employees/:id', loginValidation, admin_controller.viewEmployee);
 
 router.get('/nonActiveEmployees', loginValidation, admin_controller.viewNonActiveEmployee);
 
-router.post('/addEmployee', loginValidation, admin_controller.addEmployee);
+router.post('/addEmployee', admin_controller.addEmployee);
 
 router.post('/updateEmployee/:id', loginValidation, admin_controller.updateEmployee);
 

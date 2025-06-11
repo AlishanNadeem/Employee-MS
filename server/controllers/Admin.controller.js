@@ -61,6 +61,8 @@ exports.addEmployee = ((req, res, next) => {
         useLetters: false
     });
 
+    console.log("DSadasda", employeeId)
+
     let employee = new Employee({
         employeeId: employeeId,
         password: bcrypt.hashSync(employeeId, 8),
